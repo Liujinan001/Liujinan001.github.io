@@ -1,43 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>hadoop第二篇</title>
-    <url>/2019/10/30/hadoop%E7%AC%AC%E4%BA%8C%E7%AF%87/</url>
-    <content><![CDATA[<p>sdasdsadsadsa</p>
-]]></content>
+    <title>Java 第一篇</title>
+    <url>/2019/10/31/Java-%E7%AC%AC%E4%B8%80%E7%AF%87/</url>
+    <content><![CDATA[]]></content>
       <categories>
-        <category>hadoop</category>
-      </categories>
-      <tags>
-        <tag>hadoop</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hadoop第一篇</title>
-    <url>/2019/10/30/hadoop%E7%AC%AC%E4%B8%80%E7%AF%87/</url>
-    <content><![CDATA[<p>sdasdasd</p>
-]]></content>
-      <categories>
-        <category>hadoop</category>
-      </categories>
-      <tags>
-        <tag>hadoop</tag>
-        <tag>learning</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java第一篇</title>
-    <url>/2019/10/30/Java%E7%AC%AC%E4%B8%80%E7%AF%87/</url>
-    <content><![CDATA[<p>这个个实验版本</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Java学习</category>
+        <category>Java</category>
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>Learning</tag>
       </tags>
   </entry>
 </search>
