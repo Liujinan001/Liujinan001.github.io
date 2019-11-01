@@ -11,6 +11,43 @@
 <p>文档注释：以“/*<em>”开头，以“\</em>/”结尾，“/**”和“*/”之间的内容为注释。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 文档注释</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 单行注释</span></span><br><span class="line">        System.out.println(<span class="string">"My Name is Liu Jinan"</span>);</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">           多行注释1</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        System.out.println(<span class="string">"I Like Swimming"</span><span class="comment">/* 多行注释2 */</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h1 id="2-标识符"><a href="#2-标识符" class="headerlink" title="2. 标识符"></a>2. 标识符</h1><p>标识符：给包、类、方法、变量起名字。</p>
+<p>标识符命名规则：</p>
+<ol>
+<li>以字母，下划线”_”，美元符号”$”开头，数字不能开头</li>
+<li>不能包含空格，不可以使用关键字和保留字</li>
+<li>严格区分大小写</li>
+<li>见名知意</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>标识符</th>
+<th>规则</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>包</td>
+<td>全部小写</td>
+<td>xxxyyyzzz</td>
+</tr>
+<tr>
+<td>常量</td>
+<td>全部大写 + 下划线</td>
+<td>XXX_YYY_ZZZ</td>
+</tr>
+<tr>
+<td>类、接口</td>
+<td>首字母大写 + 驼峰原则</td>
+<td>XxxYyyZzz</td>
+</tr>
+<tr>
+<td>方法、变量</td>
+<td>驼峰原则</td>
+<td>xxxYyyZzz</td>
+</tr>
+</tbody></table>
 ]]></content>
   </entry>
   <entry>

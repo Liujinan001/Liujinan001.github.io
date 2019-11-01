@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="LiuJiNan&#39;s Blog">
 <meta property="og:description" content="1. 注释编写程序时添加注释：调高程序的可读性(编程思路和程序作用)。添加注释是一种良好的编程习惯。 注释不会出现在字节码.class文件中(编译器会跳过注释)。 Java的注释分为三种：单行注释，多行注释，文档注释。 单行注释：以“&#x2F;&#x2F;”开头，“&#x2F;&#x2F;”后面的内容为注释。 多行注释：以“&#x2F;*”开头，以“*&#x2F;”结尾，“&#x2F;*”和“*&#x2F;”之间的内容为注释。有两种形式：空白处多行注释，行内任意位置注释。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-01T07:53:16.502Z">
+<meta property="og:updated_time" content="2019-11-01T08:12:32.665Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -327,7 +327,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-01T15:53:16+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-01T16:12:32+08:00">
                 2019-11-01
               </time>
             
@@ -355,7 +355,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  203 字
+                  320 字
                 </span>
               
 
@@ -400,6 +400,43 @@
 <p>文档注释：以“/*<em>”开头，以“\</em>/”结尾，“/**”和“*/”之间的内容为注释。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 文档注释</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 单行注释</span></span><br><span class="line">        System.out.println(<span class="string">"My Name is Liu Jinan"</span>);</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">           多行注释1</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        System.out.println(<span class="string">"I Like Swimming"</span><span class="comment">/* 多行注释2 */</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h1 id="2-标识符"><a href="#2-标识符" class="headerlink" title="2. 标识符"></a>2. 标识符</h1><p>标识符：给包、类、方法、变量起名字。</p>
+<p>标识符命名规则：</p>
+<ol>
+<li>以字母，下划线”_”，美元符号”$”开头，数字不能开头</li>
+<li>不能包含空格，不可以使用关键字和保留字</li>
+<li>严格区分大小写</li>
+<li>见名知意</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>标识符</th>
+<th>规则</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>包</td>
+<td>全部小写</td>
+<td>xxxyyyzzz</td>
+</tr>
+<tr>
+<td>常量</td>
+<td>全部大写 + 下划线</td>
+<td>XXX_YYY_ZZZ</td>
+</tr>
+<tr>
+<td>类、接口</td>
+<td>首字母大写 + 驼峰原则</td>
+<td>XxxYyyZzz</td>
+</tr>
+<tr>
+<td>方法、变量</td>
+<td>驼峰原则</td>
+<td>xxxYyyZzz</td>
+</tr>
+</tbody></table>
 
       
     </div>
@@ -580,7 +617,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-注释"><span class="nav-number">1.</span> <span class="nav-text">1. 注释</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-注释"><span class="nav-number">1.</span> <span class="nav-text">1. 注释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-标识符"><span class="nav-number">2.</span> <span class="nav-text">2. 标识符</span></a></li></ol></div>
             
 
           </div>
@@ -614,7 +651,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">285</span>
+    <span title="站点总字数">402</span>
   
 </div>
 
