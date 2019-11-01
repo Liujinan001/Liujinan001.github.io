@@ -48,6 +48,37 @@
 <td>xxxYyyZzz</td>
 </tr>
 </tbody></table>
+<h1 id="3-变量"><a href="#3-变量" class="headerlink" title="3. 变量"></a>3. 变量</h1><table>
+<thead>
+<tr>
+<th>变量</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>格式</td>
+<td>变量类型  变量名  =  值</td>
+</tr>
+<tr>
+<td>作用</td>
+<td>保存数据</td>
+</tr>
+<tr>
+<td>本质</td>
+<td>可操作的存储空间（使用变量名访问）</td>
+</tr>
+<tr>
+<td>要求</td>
+<td>必须先声明，后使用</td>
+</tr>
+<tr>
+<td>三要素</td>
+<td>变量名，变量类型，作用域</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//变量的声明:声明时赋值</span></span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">double</span> b = <span class="number">1.2</span>;</span><br><span class="line">        <span class="keyword">long</span> c = <span class="number">50</span>;</span><br><span class="line">        <span class="comment">//变量的声明:先声明后赋值</span></span><br><span class="line">        <span class="keyword">int</span> d;</span><br><span class="line">        d = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-1-变量的分类"><a href="#3-1-变量的分类" class="headerlink" title="3.1 变量的分类"></a>3.1 变量的分类</h2><h3 id="3-1-1-按照数据类型"><a href="#3-1-1-按照数据类型" class="headerlink" title="3.1.1 按照数据类型"></a>3.1.1 按照数据类型</h3><p><img src="E:%5CBlog%5CBlog%5Csource%5Cimages%5C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.svg" alt="数据类型"></p>
 ]]></content>
   </entry>
   <entry>
