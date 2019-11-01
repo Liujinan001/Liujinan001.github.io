@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>1</title>
-    <url>/2019/11/01/1/</url>
-    <content><![CDATA[<p><img src="/2019/11/01/1/E:%5CBlog%5CBlog%5Csource_posts%5C1%5C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.png" alt></p>
-]]></content>
-  </entry>
-  <entry>
     <title>Java-[第二篇 Java基础语法]</title>
     <url>/2019/11/01/Java-%5B%E7%AC%AC%E4%BA%8C%E7%AF%87%20Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%5D/</url>
     <content><![CDATA[<h1 id="1-注释"><a href="#1-注释" class="headerlink" title="1. 注释"></a>1. 注释</h1><p>编写程序时添加注释：调高程序的可读性(编程思路和程序作用)。添加注释是一种良好的编程习惯。</p>
