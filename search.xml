@@ -98,7 +98,7 @@
 <tr>
 <td>short</td>
 <td>2字节</td>
-<td>$-2^15$ ~$2^15$-1</td>
+<td></td>
 </tr>
 <tr>
 <td>int</td>
@@ -126,6 +126,7 @@
 <td></td>
 </tr>
 </tbody></table>
+<p>$a^b$</p>
 ]]></content>
       <categories>
         <category>Java</category>
