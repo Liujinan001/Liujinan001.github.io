@@ -81,52 +81,158 @@
 <h2 id="3-1-变量的分类"><a href="#3-1-变量的分类" class="headerlink" title="3.1 变量的分类"></a>3.1 变量的分类</h2><h3 id="3-1-1-按照数据类型"><a href="#3-1-1-按照数据类型" class="headerlink" title="3.1.1 按照数据类型"></a>3.1.1 按照数据类型</h3><img src="/2019/11/03/Java-%E7%AC%AC%E4%BA%8C%E7%AF%87-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/1.png" style="zoom:70%;">
 
 <p>按照数据类型分类，变量分为基本数据类型和引用数据类型。</p>
-<p>基本数据类型8种：byte，short，int，long，float，double，char，boolean。引用数据类型3种：类，接口，数组。字符串属于引用数据类型。</p>
+<p>基本数据类型8种：byte，short，int，long，float，double，char，boolean。引用数据类型3种：类，接口，数组。</p>
 <table>
 <thead>
 <tr>
 <th>类型</th>
-<th>占用存储空间</th>
+<th>占用存储空间（1 byte = 8 bit）</th>
 <th>范围</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>byte</td>
-<td>1字节</td>
-<td>-128~127</td>
+<td>1 字节</td>
+<td><strong>-128 ~ 127</strong></td>
 </tr>
 <tr>
 <td>short</td>
-<td>2字节</td>
-<td></td>
+<td>2 字节</td>
+<td>-2^15^ ~ 2^15^-1</td>
 </tr>
 <tr>
 <td>int</td>
-<td>4字节</td>
-<td></td>
+<td>4 字节</td>
+<td>-2^31^ ~ 2^31^-1</td>
 </tr>
 <tr>
 <td>long</td>
-<td>8字节</td>
-<td></td>
+<td>8 字节</td>
+<td>-2^63^ ~ 2^63^-1</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
+<td>float</td>
+<td>4 字节</td>
+<td>-2^128^ ~ 2^128^</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
+<td>double</td>
+<td>8 字节</td>
+<td>-2^1024^ ~ 2^1024^</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
+<td>char</td>
+<td>2 字节</td>
+<td>—-</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td><strong>1 位</strong></td>
+<td>—-</td>
+</tr>
+<tr>
+<td>类</td>
+<td>4 字节</td>
+<td>—-</td>
+</tr>
+<tr>
+<td>接口</td>
+<td>4 字节</td>
+<td>—-</td>
+</tr>
+<tr>
+<td>数组</td>
+<td>4 字节</td>
+<td>—-</td>
 </tr>
 </tbody></table>
-<p>$a^b$</p>
+<ol>
+<li>整型有4种表示形式，整型默认是int类型，声明long类型需要加”l”或”L”</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>进制</th>
+<th>要求</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>二进制</td>
+<td>以0b/0B开头：0,1</td>
+<td>0b01110011</td>
+</tr>
+<tr>
+<td>八进制</td>
+<td>以0开头：0,1,2,3,4,5,6,7</td>
+<td>015</td>
+</tr>
+<tr>
+<td>十进制</td>
+<td>0,1,2,3,4,5,6,7,8,9</td>
+<td>512</td>
+</tr>
+<tr>
+<td>十六进制</td>
+<td>以0x/0X开头：0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F</td>
+<td>0x1A</td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li>浮点型有2种表示形式，浮点型默认是double类型，声明float类型需要加”f”或”F”</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>形式</th>
+<th>要求</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>十进制</td>
+<td>必须有小数点</td>
+<td>5.12，.512F</td>
+</tr>
+<tr>
+<td>科学计数法</td>
+<td>数E幂次方</td>
+<td>5.12e2，512E2</td>
+</tr>
+</tbody></table>
+<ol start="3">
+<li>字符型有3种表示形式，字符型可以进行运算（每个字符存在对应Unicode码），Unicode可以唯一表示世界上所有的符号，UTF-8是互联网使用最多的Unicode编码方式。”A”的Unicode十进制是65，”a”的Unicode十进制是97</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>形式</th>
+<th>要求</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单个字符</td>
+<td>‘ ‘</td>
+<td>‘a’</td>
+</tr>
+<tr>
+<td>转义字符</td>
+<td>‘\字符’</td>
+<td>‘\n’</td>
+</tr>
+<tr>
+<td>Unicode值</td>
+<td>‘\uXXXX’</td>
+<td>‘\u0061’</td>
+</tr>
+</tbody></table>
+<ol start="4">
+<li>布尔型用于逻辑判断，只有两个值true和false。</li>
+<li>字符串属于引用数据类型，使用双引号括起来” “，字符串连接符”+”，字符串和基本数据类型只能做连接运算</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>Java</category>
