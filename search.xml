@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>a</title>
+    <url>/2019/11/03/a/</url>
+    <content><![CDATA[<p><img src="/2019/11/03/a/E:%5CBlog%5CBlog%5Csource_posts%5Ca%5Cdatatype.png" alt="datatype"></p>
+]]></content>
+  </entry>
+  <entry>
     <title>Java-[第二篇 Java基础语法]</title>
     <url>/2019/11/01/Java-%5B%E7%AC%AC%E4%BA%8C%E7%AF%87%20Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%5D/</url>
     <content><![CDATA[<h1 id="1-注释"><a href="#1-注释" class="headerlink" title="1. 注释"></a>1. 注释</h1><p>编写程序时添加注释：调高程序的可读性(编程思路和程序作用)。添加注释是一种良好的编程习惯。</p>
@@ -78,7 +84,7 @@
 </tbody></table>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//变量的声明:声明时赋值</span></span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">double</span> b = <span class="number">1.2</span>;</span><br><span class="line">        <span class="keyword">long</span> c = <span class="number">50</span>;</span><br><span class="line">        <span class="comment">//变量的声明:先声明后赋值</span></span><br><span class="line">        <span class="keyword">int</span> d;</span><br><span class="line">        d = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="3-1-变量的分类"><a href="#3-1-变量的分类" class="headerlink" title="3.1 变量的分类"></a>3.1 变量的分类</h2><h3 id="3-1-1-按照数据类型"><a href="#3-1-1-按照数据类型" class="headerlink" title="3.1.1 按照数据类型"></a>3.1.1 按照数据类型</h3><p><img src="E:%5CBlog%5CBlog%5Csource%5Cimages%5Cdatatype.png" alt=""></p>
+<h2 id="3-1-变量的分类"><a href="#3-1-变量的分类" class="headerlink" title="3.1 变量的分类"></a>3.1 变量的分类</h2><h3 id="3-1-1-按照数据类型"><a href="#3-1-1-按照数据类型" class="headerlink" title="3.1.1 按照数据类型"></a>3.1.1 按照数据类型</h3><p><img src="/2019/11/01/Java-%5B%E7%AC%AC%E4%BA%8C%E7%AF%87%20Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%5D/E:%5CBlog%5CBlog%5Csource%5Cimages%5Cdatatype.png" alt></p>
 ]]></content>
   </entry>
   <entry>
