@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Java," />
 
 
 
@@ -79,14 +79,18 @@
 
 
 
-<meta name="description" content="学习笔记，归纳总结！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LiuJiNan&#39;s Blog">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;archives&#x2F;2019&#x2F;10&#x2F;index.html">
+<meta name="description" content="1. 注释编写程序时添加注释：调高程序的可读性(编程思路和程序作用)。添加注释是一种良好的编程习惯。 注释不会出现在字节码.class文件中(编译器会跳过注释)。 Java的注释分为三种：单行注释，多行注释，文档注释。 单行注释：以”&#x2F;&#x2F;“开头，”&#x2F;&#x2F;“后面的内容为注释。 多行注释：以”&#x2F;*“开头，以”*&#x2F;“结尾，”&#x2F;*“和“*&#x2F;”之间的内容为注释。有两种形式：空白处多行注释，行内任意位置注释。">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java-[第二篇 Java基础语法]">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;03&#x2F;Java-%E7%AC%AC%E4%BA%8C%E7%AF%87-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95&#x2F;index.html">
 <meta property="og:site_name" content="LiuJiNan&#39;s Blog">
-<meta property="og:description" content="学习笔记，归纳总结！">
+<meta property="og:description" content="1. 注释编写程序时添加注释：调高程序的可读性(编程思路和程序作用)。添加注释是一种良好的编程习惯。 注释不会出现在字节码.class文件中(编译器会跳过注释)。 Java的注释分为三种：单行注释，多行注释，文档注释。 单行注释：以”&#x2F;&#x2F;“开头，”&#x2F;&#x2F;“后面的内容为注释。 多行注释：以”&#x2F;*“开头，以”*&#x2F;“结尾，”&#x2F;*“和“*&#x2F;”之间的内容为注释。有两种形式：空白处多行注释，行内任意位置注释。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;03&#x2F;Java-%E7%AC%AC%E4%BA%8C%E7%AF%87-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95&#x2F;1.png">
+<meta property="og:updated_time" content="2019-11-03T06:20:58.940Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;03&#x2F;Java-%E7%AC%AC%E4%BA%8C%E7%AF%87-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95&#x2F;1.png">
 
 
 
@@ -116,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2019/10/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/11/03/Java-第二篇-Java基础语法/"/>
 
 
 
 
 
-  <title>归档 | LiuJiNan's Blog</title>
+  <title>Java-[第二篇 Java基础语法] | LiuJiNan's Blog</title>
   
 
 
@@ -141,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -267,74 +271,268 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 2 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/03/Java-%E7%AC%AC%E4%BA%8C%E7%AF%87-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiuJiNan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LiuJiNan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/10/31/Java-%5B%E7%AC%AC%E4%B8%80%E7%AF%87%20Java%E8%AF%AD%E8%A8%80%E6%A6%82%E8%BF%B0%5D/" itemprop="url">
-              
-                <span itemprop="name">Java-[第一篇 Java语言概述]</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Java-[第二篇 Java基础语法]</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-10-31T16:46:46+08:00"
-              content="2019-10-31" >
-          10-31
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-03T14:11:50+08:00">
+                2019-11-03
+              </time>
+            
 
-    </header>
-  </article>
+            
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-03T14:20:58+08:00">
+                2019-11-03
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  447 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长&#58;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-注释"><a href="#1-注释" class="headerlink" title="1. 注释"></a>1. 注释</h1><p>编写程序时添加注释：调高程序的可读性(编程思路和程序作用)。添加注释是一种良好的编程习惯。</p>
+<p>注释不会出现在字节码.class文件中(编译器会跳过注释)。</p>
+<p>Java的注释分为三种：单行注释，多行注释，文档注释。</p>
+<p>单行注释：以”//“开头，”//“后面的内容为注释。</p>
+<p>多行注释：以”/*“开头，以”*/“结尾，”/*“和“*/”之间的内容为注释。有两种形式：空白处多行注释，行内任意位置注释。</p>
+<p>文档注释：以”/**“开头，以”*/“结尾，”/**“和”*/“之间的内容为注释。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 文档注释</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 单行注释</span></span><br><span class="line">        System.out.println(<span class="string">"My Name is Liu Jinan"</span>);</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">           多行注释1</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        System.out.println(<span class="string">"I Like Swimming"</span><span class="comment">/* 多行注释2 */</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-标识符"><a href="#2-标识符" class="headerlink" title="2. 标识符"></a>2. 标识符</h1><p>标识符：给包、类、方法、变量起名字。</p>
+<p>标识符命名规则：</p>
+<ol>
+<li>以字母，下划线”_”，美元符号”$”开头，数字不能开头</li>
+<li>不能包含空格，不可以使用关键字和保留字</li>
+<li>严格区分大小写</li>
+<li>见名知意</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>标识符</th>
+<th>规则</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>包</td>
+<td>全部小写</td>
+<td>xxxyyyzzz</td>
+</tr>
+<tr>
+<td>常量</td>
+<td>全部大写 + 下划线</td>
+<td>XXX_YYY_ZZZ</td>
+</tr>
+<tr>
+<td>类、接口</td>
+<td>首字母大写 + 驼峰原则</td>
+<td>XxxYyyZzz</td>
+</tr>
+<tr>
+<td>方法、变量</td>
+<td>驼峰原则</td>
+<td>xxxYyyZzz</td>
+</tr>
+</tbody></table>
+<h1 id="3-变量"><a href="#3-变量" class="headerlink" title="3. 变量"></a>3. 变量</h1><table>
+<thead>
+<tr>
+<th>变量</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>格式</td>
+<td>变量类型  变量名  =  值</td>
+</tr>
+<tr>
+<td>作用</td>
+<td>保存数据</td>
+</tr>
+<tr>
+<td>本质</td>
+<td>可操作的存储空间（使用变量名访问）</td>
+</tr>
+<tr>
+<td>要求</td>
+<td>必须先声明，后使用</td>
+</tr>
+<tr>
+<td>三要素</td>
+<td>变量名，变量类型，作用域</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//变量的声明:声明时赋值</span></span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">double</span> b = <span class="number">1.2</span>;</span><br><span class="line">        <span class="keyword">long</span> c = <span class="number">50</span>;</span><br><span class="line">        <span class="comment">//变量的声明:先声明后赋值</span></span><br><span class="line">        <span class="keyword">int</span> d;</span><br><span class="line">        d = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-1-变量的分类"><a href="#3-1-变量的分类" class="headerlink" title="3.1 变量的分类"></a>3.1 变量的分类</h2><h3 id="3-1-1-按照数据类型"><a href="#3-1-1-按照数据类型" class="headerlink" title="3.1.1 按照数据类型"></a>3.1.1 按照数据类型</h3><img src="/2019/11/03/Java-%E7%AC%AC%E4%BA%8C%E7%AF%87-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/1.png" style="zoom:70%;">
 
 
       
-
     </div>
+    
+    
+    
+	
+	<div style="text-align:center;color: #ccc;font-size:15px;">------------------------- 文 章 结 束 <i class="fa fa-paw"></i> <i class="fa fa-paw"></i> 感 谢 观 看 -------------------------</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"> Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/01/Java-%E7%AC%AC%E4%B8%80%E7%AF%87-Java%E8%AF%AD%E8%A8%80%E6%A6%82%E8%BF%B0/" rel="next" title="Java-[第一篇 Java语言概述]">
+                <i class="fa fa-chevron-left"></i> Java-[第一篇 Java语言概述]
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -342,6 +540,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -362,8 +564,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -438,6 +649,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-注释"><span class="nav-number">1.</span> <span class="nav-text">1. 注释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-标识符"><span class="nav-number">2.</span> <span class="nav-text">2. 标识符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-变量"><span class="nav-number">3.</span> <span class="nav-text">3. 变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-变量的分类"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 变量的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-按照数据类型"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 按照数据类型</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -465,7 +692,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">540</span>
+    <span title="站点总字数">529</span>
   
 </div>
 
@@ -595,6 +822,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
