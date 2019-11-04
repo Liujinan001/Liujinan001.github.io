@@ -697,7 +697,54 @@
 </ol>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">20</span>;</span><br><span class="line">        System.out.println(a == b);     <span class="comment">// false</span></span><br><span class="line">        System.out.println(a != b);     <span class="comment">// true</span></span><br><span class="line">        System.out.println(a &lt; b);      <span class="comment">// true</span></span><br><span class="line">        System.out.println(a &gt; b);      <span class="comment">// false</span></span><br><span class="line">        System.out.println(a &lt;= b);     <span class="comment">// true</span></span><br><span class="line">        System.out.println(a &gt;= b);     <span class="comment">// false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="5-4-逻辑运算符"><a href="#5-4-逻辑运算符" class="headerlink" title="5.4 逻辑运算符"></a>5.4 逻辑运算符</h2>]]></content>
+<h2 id="5-4-逻辑运算符"><a href="#5-4-逻辑运算符" class="headerlink" title="5.4 逻辑运算符"></a>5.4 逻辑运算符</h2><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&amp;</td>
+<td>与（只要有一个false，结果为false）</td>
+<td>a &amp; b</td>
+</tr>
+<tr>
+<td>|</td>
+<td>或（只要有一个true，结果为true）</td>
+<td>a | b</td>
+</tr>
+<tr>
+<td>!</td>
+<td>非（取反）</td>
+<td>!a</td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td>短路与（只要有一个false，直接返回false）</td>
+<td>a &amp;&amp; b</td>
+</tr>
+<tr>
+<td>||</td>
+<td>短路或（只要有一个true，直接返回为true）</td>
+<td>a || b</td>
+</tr>
+<tr>
+<td>^</td>
+<td>异或（相同为false，不同为true）</td>
+<td>a ^ b</td>
+</tr>
+</tbody></table>
+<p>注意：</p>
+<ol>
+<li>逻辑运算符的操作数和结果都是boolean：true/false。</li>
+<li>数学中的 3 &lt; x &lt; 6，Java中要写成：x &gt; 3 &amp; x &lt; 6。</li>
+<li>“&amp;”和”&amp;&amp;”的区别：”&amp;”左右两边都需要计算；”&amp;&amp;”如果左边true，右边参与运算，如果左边false，右边不参与计算，直接返回false。</li>
+<li>“|”和”||”的区别：”|”左右两边都需要计算；”||”如果左边true，右边不参与运算，直接返回true，如果左边false，右边参与计算。</li>
+<li>“^”：</li>
+</ol>
+]]></content>
       <categories>
         <category>Java</category>
       </categories>

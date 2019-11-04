@@ -91,7 +91,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;03&#x2F;Java-%E7%AC%AC%E4%BA%8C%E7%AF%87-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95&#x2F;2.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;03&#x2F;Java-%E7%AC%AC%E4%BA%8C%E7%AF%87-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95&#x2F;3.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;03&#x2F;Java-%E7%AC%AC%E4%BA%8C%E7%AF%87-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95&#x2F;4.png">
-<meta property="og:updated_time" content="2019-11-04T11:32:23.491Z">
+<meta property="og:updated_time" content="2019-11-04T11:56:52.474Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;03&#x2F;Java-%E7%AC%AC%E4%BA%8C%E7%AF%87-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95&#x2F;1.png">
 
@@ -333,7 +333,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-04T19:32:23+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-04T19:56:52+08:00">
                 2019-11-04
               </time>
             
@@ -361,7 +361,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.5k 字
+                  2.7k 字
                 </span>
               
 
@@ -377,7 +377,7 @@
                   <span class="post-meta-item-text">阅读时长&#58;</span>
                 
                 <span title="阅读时长">
-                  10 分钟
+                  11 分钟
                 </span>
               
             </div>
@@ -1092,7 +1092,54 @@
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">20</span>;</span><br><span class="line">        System.out.println(a == b);     <span class="comment">// false</span></span><br><span class="line">        System.out.println(a != b);     <span class="comment">// true</span></span><br><span class="line">        System.out.println(a &lt; b);      <span class="comment">// true</span></span><br><span class="line">        System.out.println(a &gt; b);      <span class="comment">// false</span></span><br><span class="line">        System.out.println(a &lt;= b);     <span class="comment">// true</span></span><br><span class="line">        System.out.println(a &gt;= b);     <span class="comment">// false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="5-4-逻辑运算符"><a href="#5-4-逻辑运算符" class="headerlink" title="5.4 逻辑运算符"></a>5.4 逻辑运算符</h2>
+<h2 id="5-4-逻辑运算符"><a href="#5-4-逻辑运算符" class="headerlink" title="5.4 逻辑运算符"></a>5.4 逻辑运算符</h2><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&amp;</td>
+<td>与（只要有一个false，结果为false）</td>
+<td>a &amp; b</td>
+</tr>
+<tr>
+<td>|</td>
+<td>或（只要有一个true，结果为true）</td>
+<td>a | b</td>
+</tr>
+<tr>
+<td>!</td>
+<td>非（取反）</td>
+<td>!a</td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td>短路与（只要有一个false，直接返回false）</td>
+<td>a &amp;&amp; b</td>
+</tr>
+<tr>
+<td>||</td>
+<td>短路或（只要有一个true，直接返回为true）</td>
+<td>a || b</td>
+</tr>
+<tr>
+<td>^</td>
+<td>异或（相同为false，不同为true）</td>
+<td>a ^ b</td>
+</tr>
+</tbody></table>
+<p>注意：</p>
+<ol>
+<li>逻辑运算符的操作数和结果都是boolean：true/false。</li>
+<li>数学中的 3 &lt; x &lt; 6，Java中要写成：x &gt; 3 &amp; x &lt; 6。</li>
+<li>“&amp;”和”&amp;&amp;”的区别：”&amp;”左右两边都需要计算；”&amp;&amp;”如果左边true，右边参与运算，如果左边false，右边不参与计算，直接返回false。</li>
+<li>“|”和”||”的区别：”|”左右两边都需要计算；”||”如果左边true，右边不参与运算，直接返回true，如果左边false，右边参与计算。</li>
+<li>“^”：</li>
+</ol>
+
       
     </div>
     
@@ -1312,7 +1359,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">2.6k</span>
+    <span title="站点总字数">2.8k</span>
   
 </div>
 
