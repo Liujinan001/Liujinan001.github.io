@@ -91,7 +91,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;03&#x2F;Java-%E7%AC%AC%E4%BA%8C%E7%AF%87-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95&#x2F;2.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;03&#x2F;Java-%E7%AC%AC%E4%BA%8C%E7%AF%87-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95&#x2F;3.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;03&#x2F;Java-%E7%AC%AC%E4%BA%8C%E7%AF%87-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95&#x2F;4.png">
-<meta property="og:updated_time" content="2019-11-04T11:56:52.474Z">
+<meta property="og:updated_time" content="2019-11-04T13:52:00.135Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;03&#x2F;Java-%E7%AC%AC%E4%BA%8C%E7%AF%87-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95&#x2F;1.png">
 
@@ -333,7 +333,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-04T19:56:52+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-04T21:52:00+08:00">
                 2019-11-04
               </time>
             
@@ -361,7 +361,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.7k 字
+                  3.1k 字
                 </span>
               
 
@@ -377,7 +377,7 @@
                   <span class="post-meta-item-text">阅读时长&#58;</span>
                 
                 <span title="阅读时长">
-                  11 分钟
+                  13 分钟
                 </span>
               
             </div>
@@ -1137,7 +1137,210 @@
 <li>数学中的 3 &lt; x &lt; 6，Java中要写成：x &gt; 3 &amp; x &lt; 6。</li>
 <li>“&amp;”和”&amp;&amp;”的区别：”&amp;”左右两边都需要计算；”&amp;&amp;”如果左边true，右边参与运算，如果左边false，右边不参与计算，直接返回false。</li>
 <li>“|”和”||”的区别：”|”左右两边都需要计算；”||”如果左边true，右边不参与运算，直接返回true，如果左边false，右边参与计算。</li>
-<li>“^”：</li>
+<li>“^”：对于任何数a，a ^ a = 0，a ^ 0 = a。</li>
+</ol>
+<p>真值表：</p>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>a &amp; b</th>
+<th>a &amp;&amp; b</th>
+<th>a | b</th>
+<th>a || b</th>
+<th>! a</th>
+<th>a ^ b</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+</tr>
+<tr>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>true</td>
+<td>true</td>
+<td>false</td>
+<td>true</td>
+</tr>
+<tr>
+<td>false</td>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+</tr>
+<tr>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+<td>true</td>
+<td>false</td>
+</tr>
+</tbody></table>
+<h2 id="5-5-位运算符"><a href="#5-5-位运算符" class="headerlink" title="5.5 位运算符"></a>5.5 位运算符</h2><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&amp;</td>
+<td>与</td>
+<td>a &amp; b</td>
+</tr>
+<tr>
+<td>|</td>
+<td>或</td>
+<td>a | b</td>
+</tr>
+<tr>
+<td>~</td>
+<td>取反</td>
+<td>~a</td>
+</tr>
+<tr>
+<td>^</td>
+<td>异或</td>
+<td>a ^ b</td>
+</tr>
+<tr>
+<td>&lt;&lt;</td>
+<td>左移</td>
+<td>a &lt;&lt; b</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>右移</td>
+<td>a &gt;&gt; b</td>
+</tr>
+</tbody></table>
+<p>注意：</p>
+<ol>
+<li>位运算符是对左右两个数进行二进制位的运算。</li>
+<li>在不越界的情况下：”&lt;&lt; 1”相当于”*2”，”&gt;&gt; 1”相当于”/2取商”。</li>
+<li>关于数字的算法题中，经常通过位运算进行骚操作。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">6</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">5</span>;</span><br><span class="line">        System.out.println(a &amp; b);  <span class="comment">//结果：4      0110 &amp; 0101 = 0100</span></span><br><span class="line">        System.out.println(a | b);  <span class="comment">//结果：7      0110 | 0101 = 0111</span></span><br><span class="line">        System.out.println(~a);     <span class="comment">//结果：-7     计算机使用补码表示负数：-(a+1)</span></span><br><span class="line">        System.out.println(a ^ b);  <span class="comment">//结果：3      0110 ^ 0101 = 0011</span></span><br><span class="line">        System.out.println(a &lt;&lt; <span class="number">1</span>); <span class="comment">//结果：12     6 * 2</span></span><br><span class="line">        System.out.println(a &lt;&lt; <span class="number">2</span>); <span class="comment">//结果：24     6 * 2 * 2</span></span><br><span class="line">        System.out.println(b &gt;&gt; <span class="number">1</span>); <span class="comment">//结果：2      5 / 2</span></span><br><span class="line">        System.out.println(b &gt;&gt; <span class="number">2</span>); <span class="comment">//结果：1      5 / 2 / 2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-6-三元运算符"><a href="#5-6-三元运算符" class="headerlink" title="5.6 三元运算符"></a>5.6 三元运算符</h2><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>x ? y : z</td>
+<td>x为boolean；x为true，结果为表达式y；x为false，结果为表达式z</td>
+</tr>
+</tbody></table>
+<p>注意：</p>
+<ol>
+<li>三元运算符是”if…else…”的简写形式。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="number">1</span> != <span class="number">2</span> ? <span class="string">"小学毕业"</span> : <span class="string">"小学没毕业"</span>);  <span class="comment">//结果：小学毕业</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-7-运算符优先级"><a href="#5-7-运算符优先级" class="headerlink" title="5.7 运算符优先级"></a>5.7 运算符优先级</h2><table>
+<thead>
+<tr>
+<th>优先级</th>
+<th>运算符</th>
+<th>结合顺序</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>11</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>13</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>14</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>注意：</p>
+<ol>
+<li>运算符的优先级比较难记住</li>
 </ol>
 
       
@@ -1325,7 +1528,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-注释"><span class="nav-text">1. 注释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-标识符"><span class="nav-text">2. 标识符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-变量"><span class="nav-text">3. 变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-分类"><span class="nav-text">3.1 分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-按照数据类型"><span class="nav-text">3.1.1 按照数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-按照声明位置"><span class="nav-text">3.1.2 按照声明位置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-默认值"><span class="nav-text">3.2 默认值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-类型转换"><span class="nav-text">3.3 类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-数据交换和赋值"><span class="nav-text">3.4 数据交换和赋值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-关键字和保留字"><span class="nav-text">4. 关键字和保留字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-运算符"><span class="nav-text">5. 运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-算术运算符"><span class="nav-text">5.1 算术运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-赋值运算符"><span class="nav-text">5.2 赋值运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-比较运算符"><span class="nav-text">5.3 比较运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-逻辑运算符"><span class="nav-text">5.4 逻辑运算符</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-注释"><span class="nav-text">1. 注释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-标识符"><span class="nav-text">2. 标识符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-变量"><span class="nav-text">3. 变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-分类"><span class="nav-text">3.1 分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-按照数据类型"><span class="nav-text">3.1.1 按照数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-按照声明位置"><span class="nav-text">3.1.2 按照声明位置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-默认值"><span class="nav-text">3.2 默认值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-类型转换"><span class="nav-text">3.3 类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-数据交换和赋值"><span class="nav-text">3.4 数据交换和赋值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-关键字和保留字"><span class="nav-text">4. 关键字和保留字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-运算符"><span class="nav-text">5. 运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-算术运算符"><span class="nav-text">5.1 算术运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-赋值运算符"><span class="nav-text">5.2 赋值运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-比较运算符"><span class="nav-text">5.3 比较运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-逻辑运算符"><span class="nav-text">5.4 逻辑运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-位运算符"><span class="nav-text">5.5 位运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-6-三元运算符"><span class="nav-text">5.6 三元运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-7-运算符优先级"><span class="nav-text">5.7 运算符优先级</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1359,7 +1562,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">2.8k</span>
+    <span title="站点总字数">3.2k</span>
   
 </div>
 
