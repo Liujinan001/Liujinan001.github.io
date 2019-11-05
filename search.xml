@@ -953,7 +953,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>if（布尔表达式）{<br><pre>&#9</pre>语句块<br>}</td>
+<td>if（布尔表达式）{<br>&#9;语句块<br>}</td>
 <td></td>
 <td></td>
 <td></td>
