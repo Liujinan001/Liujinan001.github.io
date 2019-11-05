@@ -946,17 +946,17 @@
 <table>
 <thead>
 <tr>
-<th align="left"></th>
-<th align="center"></th>
-<th></th>
-<th></th>
+<th align="left">if</th>
+<th align="left">if-else</th>
+<th align="left">if-else if -else</th>
+<th>switch-case</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="left">if（布尔表达式）{<br>&#9;&#9;语句块<br>}</td>
-<td align="center"></td>
-<td></td>
-<td></td>
+<td align="left">if（布尔表达式）{<br>&#8195;&#8195;语句块<br>}</td>
+<td align="left">if（布尔表达式）{<br>&#8195;&#8195;语句块1<br>} else {<br>&#8195;&#8195;语句块2<br>}</td>
+<td align="left">if（布尔表达式1）{<br>&#8195;&#8195;语句块1<br>} else if （布尔表达式2）{<br>&#8195;&#8195;语句块2<br>} else {<br>&#8195;&#8195;语句块3<br>}</td>
+<td>switch（表达式）{<br>&#8195;&#8195;case&#8195;值1：语句1<br>&#8195;&#8195;case&#8195;值2：语句2<br>&#8195;&#8195;……<br>&#8195;&#8195;case&#8195;值n：语句n<br>&#8195;&#8195;default：语句<br>}</td>
 </tr>
 </tbody></table>
 ]]></content>
