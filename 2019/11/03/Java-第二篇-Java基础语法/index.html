@@ -91,7 +91,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;03&#x2F;Java-%E7%AC%AC%E4%BA%8C%E7%AF%87-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95&#x2F;2.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;03&#x2F;Java-%E7%AC%AC%E4%BA%8C%E7%AF%87-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95&#x2F;3.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;03&#x2F;Java-%E7%AC%AC%E4%BA%8C%E7%AF%87-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95&#x2F;4.png">
-<meta property="og:updated_time" content="2019-11-04T13:52:00.135Z">
+<meta property="og:updated_time" content="2019-11-05T03:04:51.814Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;03&#x2F;Java-%E7%AC%AC%E4%BA%8C%E7%AF%87-Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95&#x2F;1.png">
 
@@ -333,8 +333,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-04T21:52:00+08:00">
-                2019-11-04
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-05T11:04:51+08:00">
+                2019-11-05
               </time>
             
           </span>
@@ -361,7 +361,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3.1k 字
+                  3.4k 字
                 </span>
               
 
@@ -377,7 +377,7 @@
                   <span class="post-meta-item-text">阅读时长&#58;</span>
                 
                 <span title="阅读时长">
-                  13 分钟
+                  14 分钟
                 </span>
               
             </div>
@@ -1264,84 +1264,96 @@
 <tr>
 <th>优先级</th>
 <th>运算符</th>
-<th>结合顺序</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>1</td>
-<td></td>
-<td></td>
+<td>()</td>
 </tr>
 <tr>
 <td>2</td>
-<td></td>
-<td></td>
+<td>++，–，~，！，+(正号)，-(负号)</td>
 </tr>
 <tr>
 <td>3</td>
-<td></td>
-<td></td>
+<td>*，/，%</td>
 </tr>
 <tr>
 <td>4</td>
-<td></td>
-<td></td>
+<td>+(加法)，-(减法)</td>
 </tr>
 <tr>
 <td>5</td>
-<td></td>
-<td></td>
+<td>&lt;&lt;，&gt;&gt;，&gt;&gt;&gt;</td>
 </tr>
 <tr>
 <td>6</td>
-<td></td>
-<td></td>
+<td>&lt;，&gt;，&lt;=，&gt;=，instanceof</td>
 </tr>
 <tr>
 <td>7</td>
-<td></td>
-<td></td>
+<td>==，!=</td>
 </tr>
 <tr>
 <td>8</td>
-<td></td>
-<td></td>
+<td>&amp;</td>
 </tr>
 <tr>
 <td>9</td>
-<td></td>
-<td></td>
+<td>&amp;</td>
 </tr>
 <tr>
 <td>10</td>
-<td></td>
-<td></td>
+<td>|</td>
 </tr>
 <tr>
 <td>11</td>
-<td></td>
-<td></td>
+<td>&amp;&amp;</td>
 </tr>
 <tr>
 <td>12</td>
-<td></td>
-<td></td>
+<td>||</td>
 </tr>
 <tr>
 <td>13</td>
-<td></td>
-<td></td>
+<td>?   :</td>
 </tr>
 <tr>
 <td>14</td>
-<td></td>
-<td></td>
+<td>=，*=，/=，%=，+=，-=，&lt;&lt;=，&gt;&gt;=，&gt;&gt;&gt;=，&amp;=，^=，|=</td>
 </tr>
 </tbody></table>
 <p>注意：</p>
 <ol>
-<li>运算符的优先级比较难记住</li>
+<li>运算符的优先级比较难记住，规避使用混合运算符，优先使用”()”。</li>
+<li>混合运算符一般出现在面试题里，如果程序开发中大量使用，会被开除。</li>
+<li>逻辑与，逻辑或，逻辑非的优先级需要掌握：! &gt; &amp; &gt; |。</li>
 </ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> y = <span class="number">4</span>;</span><br><span class="line">        <span class="keyword">int</span> z = <span class="number">5</span>;</span><br><span class="line">        System.out.println((x-y)*z/<span class="number">5</span>);          <span class="comment">//结果：-3</span></span><br><span class="line">        System.out.println(--y | ++x &amp; ++z);    <span class="comment">//结果：3</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-流程控制语句"><a href="#6-流程控制语句" class="headerlink" title="6. 流程控制语句"></a>6. 流程控制语句</h1><p>流程控制语句分为3类：顺序结构，选择结构和循环结构。</p>
+<h2 id="6-1-顺序结构"><a href="#6-1-顺序结构" class="headerlink" title="6.1 顺序结构"></a>6.1 顺序结构</h2><p>顺序结构：程序从上到下逐行执行，中间没有任何判断和跳转。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 依次打印下面4句话</span></span><br><span class="line">        System.out.println(“<span class="string">"这是第一句话"</span>);</span><br><span class="line">        System.out.println(<span class="string">"这是第二句话"</span>);</span><br><span class="line">        System.out.println(<span class="string">"这是第三句话"</span>);</span><br><span class="line">        System.out.println(<span class="string">"这是第四句话"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-2-选择结构"><a href="#6-2-选择结构" class="headerlink" title="6.2 选择结构"></a>6.2 选择结构</h2><p>选择结构：根据判断条件，选择性的执行某段代码，分为”if…else…”和”switch…case…”。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>if（布尔表达式）{<br>     语句块<br><br>}</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
 
       
     </div>
@@ -1528,7 +1540,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-注释"><span class="nav-text">1. 注释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-标识符"><span class="nav-text">2. 标识符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-变量"><span class="nav-text">3. 变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-分类"><span class="nav-text">3.1 分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-按照数据类型"><span class="nav-text">3.1.1 按照数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-按照声明位置"><span class="nav-text">3.1.2 按照声明位置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-默认值"><span class="nav-text">3.2 默认值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-类型转换"><span class="nav-text">3.3 类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-数据交换和赋值"><span class="nav-text">3.4 数据交换和赋值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-关键字和保留字"><span class="nav-text">4. 关键字和保留字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-运算符"><span class="nav-text">5. 运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-算术运算符"><span class="nav-text">5.1 算术运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-赋值运算符"><span class="nav-text">5.2 赋值运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-比较运算符"><span class="nav-text">5.3 比较运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-逻辑运算符"><span class="nav-text">5.4 逻辑运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-位运算符"><span class="nav-text">5.5 位运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-6-三元运算符"><span class="nav-text">5.6 三元运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-7-运算符优先级"><span class="nav-text">5.7 运算符优先级</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-注释"><span class="nav-text">1. 注释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-标识符"><span class="nav-text">2. 标识符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-变量"><span class="nav-text">3. 变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-分类"><span class="nav-text">3.1 分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-按照数据类型"><span class="nav-text">3.1.1 按照数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-按照声明位置"><span class="nav-text">3.1.2 按照声明位置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-默认值"><span class="nav-text">3.2 默认值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-类型转换"><span class="nav-text">3.3 类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-数据交换和赋值"><span class="nav-text">3.4 数据交换和赋值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-关键字和保留字"><span class="nav-text">4. 关键字和保留字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-运算符"><span class="nav-text">5. 运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-算术运算符"><span class="nav-text">5.1 算术运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-赋值运算符"><span class="nav-text">5.2 赋值运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-比较运算符"><span class="nav-text">5.3 比较运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-逻辑运算符"><span class="nav-text">5.4 逻辑运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-位运算符"><span class="nav-text">5.5 位运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-6-三元运算符"><span class="nav-text">5.6 三元运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-7-运算符优先级"><span class="nav-text">5.7 运算符优先级</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-流程控制语句"><span class="nav-text">6. 流程控制语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-顺序结构"><span class="nav-text">6.1 顺序结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-选择结构"><span class="nav-text">6.2 选择结构</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1562,7 +1574,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">3.2k</span>
+    <span title="站点总字数">3.5k</span>
   
 </div>
 
