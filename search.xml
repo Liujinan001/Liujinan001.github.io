@@ -946,15 +946,15 @@
 <table>
 <thead>
 <tr>
-<th></th>
-<th></th>
+<th align="left"></th>
+<th align="center"></th>
 <th></th>
 <th></th>
 </tr>
 </thead>
 <tbody><tr>
-<td>if（布尔表达式）{<br>&#9;语句块<br>}</td>
-<td></td>
+<td align="left">if（布尔表达式）{<br>&#9;&#9;语句块<br>}</td>
+<td align="center"></td>
 <td></td>
 <td></td>
 </tr>
