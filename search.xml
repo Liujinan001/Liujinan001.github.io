@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>aa</title>
+    <url>/2019/11/06/aa/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>Java-[第三篇 Java面向对象]</title>
     <url>/2019/11/05/Java-%E7%AC%AC%E4%B8%89%E7%AF%87-Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<p>aa</p>
+]]></content>
       <categories>
         <category>Java</category>
       </categories>
