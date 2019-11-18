@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="LiuJiNan&#39;s Blog">
 <meta property="og:description" content="面向对象编程和面向过程编程是两种不同的编程思想。 C语言是面向过程语言，Java是面向对象语言。 面向过程的基本单元是函数，面试对象的基本单元是类。 举例来说：制造一辆汽车，面向过程是把每一步的工艺步骤列出，按照顺序执行，最终完成；面向对象是把汽车拆成多个对象，轮胎、发动机、底盘，将多个对象组装，最终完成。 对于复杂问题，宏观上采用面向对象，微观上采用面向过程。 1. 类类是对事物抽象的描述。类的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-18T08:47:14.966Z">
+<meta property="og:updated_time" content="2019-11-18T11:15:45.375Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -328,7 +328,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-18T16:47:14+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-18T19:15:45+08:00">
                 2019-11-18
               </time>
             
@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.1k 字
+                  2.5k 字
                 </span>
               
 
@@ -372,7 +372,7 @@
                   <span class="post-meta-item-text">阅读时长&#58;</span>
                 
                 <span title="阅读时长">
-                  8 分钟
+                  10 分钟
                 </span>
               
             </div>
@@ -591,7 +591,27 @@
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Person p1 = <span class="keyword">new</span> Person(<span class="string">"zhangsan"</span>,<span class="number">20</span>);</span><br><span class="line">        System.out.println(p1.sex);				<span class="comment">// 结果：  (没有给属性赋值，使用char的默认值)</span></span><br><span class="line">        Person p2 = <span class="keyword">new</span> Person(<span class="string">"lisi"</span>,<span class="number">21</span>,<span class="string">'男'</span>);</span><br><span class="line">        System.out.println(p2.sex);				<span class="comment">// 结果：男</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">char</span> sex;</span><br><span class="line">    <span class="comment">// 空参构造器</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 有参构造器</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name,<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 有参构造器</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name,<span class="keyword">int</span> age,<span class="keyword">char</span> sex)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.sex = sex;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="1-4-代码块"><a href="#1-4-代码块" class="headerlink" title="1.4 代码块"></a>1.4 代码块</h2><p>代码块(block)，</p>
+<h2 id="1-4-代码块"><a href="#1-4-代码块" class="headerlink" title="1.4 代码块"></a>1.4 代码块</h2><p>代码块(block)，用于将多行代码封装成一个独立的数据体。</p>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>修饰符 {<br>&#8195;&#8195;语句<br>}</td>
+</tr>
+</tbody></table>
+<p>注意：</p>
+<ol>
+<li>代码块的修饰符有2种：(缺省)，static。</li>
+<li>根据是否被static修饰，代码块分为静态代码块(被static修饰)和构造代码块(没有被static修饰)。</li>
+<li>静态代码块在类加载时执行，只执行一次，且优先于构造代码块，用于对静态属性进行初始化，不可以对非静态属性进行初始化，多个静态代码块按照从上到下顺序执行。</li>
+<li>构造代码块在创建对象时执行，每次创建对象都会执行一次，且优先于构造器，用于对不同对象的共性内容进行初始化，多个非静态代码块按照从上到下顺序执行。</li>
+<li>执行顺序：静态代码块 &gt; 构造代码块 &gt; 构造器。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Person p1 = <span class="keyword">new</span> Person(<span class="string">"lisi"</span>,<span class="number">21</span>,<span class="string">'男'</span>);</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">          结果：</span></span><br><span class="line"><span class="comment">          静态代码块</span></span><br><span class="line"><span class="comment">          构造代码块</span></span><br><span class="line"><span class="comment">          有参构造器</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">char</span> sex;</span><br><span class="line">    <span class="comment">// 静态代码块</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"静态代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 构造代码块</span></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"构造代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"无参构造器"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name,<span class="keyword">int</span> age,<span class="keyword">char</span> sex)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.sex = sex;</span><br><span class="line">        System.out.println(<span class="string">"有参构造器"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -812,7 +832,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">7k</span>
+    <span title="站点总字数">7.4k</span>
   
 </div>
 
