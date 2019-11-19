@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="LiuJiNan&#39;s Blog">
 <meta property="og:description" content="面向对象编程和面向过程编程是两种不同的编程思想。 C语言是面向过程语言，Java是面向对象语言。 面向过程的基本单元是函数，面试对象的基本单元是类。 举例来说：制造一辆汽车，面向过程是把每一步的工艺步骤列出，按照顺序执行，最终完成；面向对象是把汽车拆成多个对象，轮胎、发动机、底盘，将多个对象组装，最终完成。 对于复杂问题，宏观上采用面向对象，微观上采用面向过程。 1. 类类是对事物抽象的描述。类的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-19T09:28:05.425Z">
+<meta property="og:updated_time" content="2019-11-19T10:05:15.432Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -328,7 +328,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-19T17:28:05+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-19T18:05:15+08:00">
                 2019-11-19
               </time>
             
@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4.4k 字
+                  4.7k 字
                 </span>
               
 
@@ -372,7 +372,7 @@
                   <span class="post-meta-item-text">阅读时长&#58;</span>
                 
                 <span title="阅读时长">
-                  18 分钟
+                  19 分钟
                 </span>
               
             </div>
@@ -482,7 +482,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>修饰符   返回值类型   方法名（形参列表）{<br>&#8195;&#8195;方法体<br>}</td>
+<td>修饰符   返回值类型   方法名(形参列表)   {<br>&#8195;&#8195;方法体<br>}</td>
 </tr>
 </tbody></table>
 <p>注意：</p>
@@ -599,7 +599,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>修饰符 {<br>&#8195;&#8195;语句<br>}</td>
+<td>修饰符   {<br>&#8195;&#8195;语句<br>}</td>
 </tr>
 </tbody></table>
 <p>注意：</p>
@@ -620,7 +620,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>修饰符   class   外部类名   {<br>&#8195;&#8195;修饰符 class 内部类名 {<br>&#8195;&#8195;&#8195;&#8195;类体<br>&#8195;&#8195;}<br>}</td>
+<td>修饰符   class   外部类名   {<br>&#8195;&#8195;修饰符   class   内部类名   {<br>&#8195;&#8195;&#8195;&#8195;类体<br>&#8195;&#8195;}<br>}</td>
 </tr>
 </tbody></table>
 <p>注意：</p>
@@ -668,7 +668,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>class 子类 extends 父类 {<br>&#8195;&#8195;类体<br>}</td>
+<td>class   子类   extends   父类   {<br>&#8195;&#8195;类体<br>}</td>
 </tr>
 </tbody></table>
 <p>注意：</p>
@@ -699,7 +699,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>父类 父类引用 = new 子类构造器</td>
+<td>父类   父类引用   =   new   子类构造器</td>
 </tr>
 </tbody></table>
 <p>注意：</p>
@@ -714,7 +714,27 @@
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 父类引用指向子类对象，向上转型</span></span><br><span class="line">         Person p = <span class="keyword">new</span> Woman();</span><br><span class="line">         p.sleep();</span><br><span class="line">         p.eat();</span><br><span class="line">         <span class="keyword">if</span>(p <span class="keyword">instanceof</span> Woman)&#123;</span><br><span class="line">             <span class="comment">// 向下转型</span></span><br><span class="line">             Woman w = (Woman) p;</span><br><span class="line">             w.buy();</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="comment">/*</span></span><br><span class="line"><span class="comment">            结果：</span></span><br><span class="line"><span class="comment">            Woman is sleeping</span></span><br><span class="line"><span class="comment">            Woman is eating</span></span><br><span class="line"><span class="comment">            Woman is buying</span></span><br><span class="line"><span class="comment">          */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Person is eating"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Person is sleeping"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Woman is eating"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Woman is sleeping"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buy</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Woman is buying"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Man</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Man is eating"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Man is sleeping"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">smoking</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Man is smoking"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-4-抽象"><a href="#2-4-抽象" class="headerlink" title="2.4 抽象"></a>2.4 抽象</h2><p>抽象(abstract)</p>
+<h2 id="2-4-抽象"><a href="#2-4-抽象" class="headerlink" title="2.4 抽象"></a>2.4 抽象</h2><p>抽象(abstract)的作用是定义规范，子类必须提供具体实现。</p>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>abstract   class   类名   {<br>&#8195;&#8195;abstract   返回值类型   方法名(形参列表)<br>}</td>
+</tr>
+</tbody></table>
+<p>注意：</p>
+<ol>
+<li>使用abstract修饰的类是抽象类，使用abstract修饰的方法是抽象方法，抽象方法所在的类必须是抽象类。</li>
+<li>抽象类可以包含属性，方法，构造器，代码块，内部类，但是不能被实例化。</li>
+<li>抽象方法只有方法的声明，没有方法的具体实现。</li>
+<li>抽象类只能被子类继承，抽象方法必须被非抽象子类实现。</li>
+<li>abstract不可以与private，final和static一起使用。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Man m = <span class="keyword">new</span> Man();</span><br><span class="line">        m.run();</span><br><span class="line">        Woman w = <span class="keyword">new</span> Woman();</span><br><span class="line">        w.run();</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        	结果：</span></span><br><span class="line"><span class="comment">        	Man is running quickly</span></span><br><span class="line"><span class="comment">			Woman is running slowly</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Man</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Man is running quickly"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Woman is running slowly"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="2-5-接口"><a href="#2-5-接口" class="headerlink" title="2.5 接口"></a>2.5 接口</h2><p>接口(interface)</p>
 
       
@@ -936,7 +956,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">9.3k</span>
+    <span title="站点总字数">9.6k</span>
   
 </div>
 

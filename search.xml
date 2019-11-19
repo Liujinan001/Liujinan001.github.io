@@ -92,7 +92,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>修饰符   返回值类型   方法名（形参列表）{<br>&#8195;&#8195;方法体<br>}</td>
+<td>修饰符   返回值类型   方法名(形参列表)   {<br>&#8195;&#8195;方法体<br>}</td>
 </tr>
 </tbody></table>
 <p>注意：</p>
@@ -209,7 +209,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>修饰符 {<br>&#8195;&#8195;语句<br>}</td>
+<td>修饰符   {<br>&#8195;&#8195;语句<br>}</td>
 </tr>
 </tbody></table>
 <p>注意：</p>
@@ -230,7 +230,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>修饰符   class   外部类名   {<br>&#8195;&#8195;修饰符 class 内部类名 {<br>&#8195;&#8195;&#8195;&#8195;类体<br>&#8195;&#8195;}<br>}</td>
+<td>修饰符   class   外部类名   {<br>&#8195;&#8195;修饰符   class   内部类名   {<br>&#8195;&#8195;&#8195;&#8195;类体<br>&#8195;&#8195;}<br>}</td>
 </tr>
 </tbody></table>
 <p>注意：</p>
@@ -278,7 +278,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>class 子类 extends 父类 {<br>&#8195;&#8195;类体<br>}</td>
+<td>class   子类   extends   父类   {<br>&#8195;&#8195;类体<br>}</td>
 </tr>
 </tbody></table>
 <p>注意：</p>
@@ -309,7 +309,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>父类 父类引用 = new 子类构造器</td>
+<td>父类   父类引用   =   new   子类构造器</td>
 </tr>
 </tbody></table>
 <p>注意：</p>
@@ -324,7 +324,27 @@
 </ol>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 父类引用指向子类对象，向上转型</span></span><br><span class="line">         Person p = <span class="keyword">new</span> Woman();</span><br><span class="line">         p.sleep();</span><br><span class="line">         p.eat();</span><br><span class="line">         <span class="keyword">if</span>(p <span class="keyword">instanceof</span> Woman)&#123;</span><br><span class="line">             <span class="comment">// 向下转型</span></span><br><span class="line">             Woman w = (Woman) p;</span><br><span class="line">             w.buy();</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="comment">/*</span></span><br><span class="line"><span class="comment">            结果：</span></span><br><span class="line"><span class="comment">            Woman is sleeping</span></span><br><span class="line"><span class="comment">            Woman is eating</span></span><br><span class="line"><span class="comment">            Woman is buying</span></span><br><span class="line"><span class="comment">          */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Person is eating"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Person is sleeping"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Woman is eating"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Woman is sleeping"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buy</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Woman is buying"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Man</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Man is eating"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Man is sleeping"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">smoking</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Man is smoking"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-4-抽象"><a href="#2-4-抽象" class="headerlink" title="2.4 抽象"></a>2.4 抽象</h2><p>抽象(abstract)</p>
+<h2 id="2-4-抽象"><a href="#2-4-抽象" class="headerlink" title="2.4 抽象"></a>2.4 抽象</h2><p>抽象(abstract)的作用是定义规范，子类必须提供具体实现。</p>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>abstract   class   类名   {<br>&#8195;&#8195;abstract   返回值类型   方法名(形参列表)<br>}</td>
+</tr>
+</tbody></table>
+<p>注意：</p>
+<ol>
+<li>使用abstract修饰的类是抽象类，使用abstract修饰的方法是抽象方法，抽象方法所在的类必须是抽象类。</li>
+<li>抽象类可以包含属性，方法，构造器，代码块，内部类，但是不能被实例化。</li>
+<li>抽象方法只有方法的声明，没有方法的具体实现。</li>
+<li>抽象类只能被子类继承，抽象方法必须被非抽象子类实现。</li>
+<li>abstract不可以与private，final和static一起使用。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Man m = <span class="keyword">new</span> Man();</span><br><span class="line">        m.run();</span><br><span class="line">        Woman w = <span class="keyword">new</span> Woman();</span><br><span class="line">        w.run();</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        	结果：</span></span><br><span class="line"><span class="comment">        	Man is running quickly</span></span><br><span class="line"><span class="comment">			Woman is running slowly</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Man</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Man is running quickly"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Woman is running slowly"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="2-5-接口"><a href="#2-5-接口" class="headerlink" title="2.5 接口"></a>2.5 接口</h2><p>接口(interface)</p>
 ]]></content>
       <categories>
