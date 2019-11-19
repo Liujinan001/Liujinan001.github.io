@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="LiuJiNan&#39;s Blog">
 <meta property="og:description" content="面向对象编程和面向过程编程是两种不同的编程思想。 C语言是面向过程语言，Java是面向对象语言。 面向过程的基本单元是函数，面试对象的基本单元是类。 举例来说：制造一辆汽车，面向过程是把每一步的工艺步骤列出，按照顺序执行，最终完成；面向对象是把汽车拆成多个对象，轮胎、发动机、底盘，将多个对象组装，最终完成。 对于复杂问题，宏观上采用面向对象，微观上采用面向过程。 1. 类类是对事物抽象的描述。类的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-18T13:47:28.359Z">
+<meta property="og:updated_time" content="2019-11-19T03:42:52.050Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-18T21:47:28+08:00">
-                2019-11-18
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-19T11:42:52+08:00">
+                2019-11-19
               </time>
             
           </span>
@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3.3k 字
+                  3.7k 字
                 </span>
               
 
@@ -372,7 +372,7 @@
                   <span class="post-meta-item-text">阅读时长&#58;</span>
                 
                 <span title="阅读时长">
-                  13 分钟
+                  15 分钟
                 </span>
               
             </div>
@@ -660,7 +660,31 @@
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 私有化属性</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 提供公共的set/get方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 添加对属性的验证</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(age &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.age = age;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-2-继承"><a href="#2-2-继承" class="headerlink" title="2.2 继承"></a>2.2 继承</h2><h2 id="2-3-多态"><a href="#2-3-多态" class="headerlink" title="2.3 多态"></a>2.3 多态</h2><h2 id="2-4-抽象"><a href="#2-4-抽象" class="headerlink" title="2.4 抽象"></a>2.4 抽象</h2><h2 id="2-5-接口"><a href="#2-5-接口" class="headerlink" title="2.5 接口"></a>2.5 接口</h2>
+<h2 id="2-2-继承"><a href="#2-2-继承" class="headerlink" title="2.2 继承"></a>2.2 继承</h2><p>继承是从已有的类中派生出新的类，用来减少代码的冗余，提高代码的扩展性，为多态提供前提。</p>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>class 子类 extends 父类 {<br>&#8195;&#8195;类体<br>}</td>
+</tr>
+</tbody></table>
+<p>注意：</p>
+<ol>
+<li>Java只支持单继承，不允许多继承(子类只能直接继承一个父类)。</li>
+<li>子类继承父类，可以得到父类的全部属性和方法，但是不可以直接访问父类的私有属性和方法。</li>
+<li>对于父类的私有属性，子类可以通过set/get方法间接访问；对于父类的方法，子类可以进行重写；子类可以定义自己独有的属性和方法。</li>
+<li>子类不继承父类的构造器，子类实例化时所有的构造器默认调用父类的空参构造器(为了方便，定义类时要显式写出空参构造器)。</li>
+<li>父类的概念是相对的，存在直接父类和间接父类。</li>
+<li>所有的类都继承java.lang.Object类。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;    </span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, <span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(name + <span class="string">"is eating"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(name + <span class="string">"is sleeping"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 子类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Man</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="comment">// 子类独有属性</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> salary;</span><br><span class="line">    <span class="comment">// 子类重写父类方法</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Man is eating"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 子类独有方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Man is working"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-3-多态"><a href="#2-3-多态" class="headerlink" title="2.3 多态"></a>2.3 多态</h2><h2 id="2-4-抽象"><a href="#2-4-抽象" class="headerlink" title="2.4 抽象"></a>2.4 抽象</h2><h2 id="2-5-接口"><a href="#2-5-接口" class="headerlink" title="2.5 接口"></a>2.5 接口</h2>
       
     </div>
     
@@ -880,7 +904,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">8.2k</span>
+    <span title="站点总字数">8.6k</span>
   
 </div>
 
