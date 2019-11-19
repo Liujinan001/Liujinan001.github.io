@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="LiuJiNan&#39;s Blog">
 <meta property="og:description" content="面向对象编程和面向过程编程是两种不同的编程思想。 C语言是面向过程语言，Java是面向对象语言。 面向过程的基本单元是函数，面试对象的基本单元是类。 举例来说：制造一辆汽车，面向过程是把每一步的工艺步骤列出，按照顺序执行，最终完成；面向对象是把汽车拆成多个对象，轮胎、发动机、底盘，将多个对象组装，最终完成。 对于复杂问题，宏观上采用面向对象，微观上采用面向过程。 1. 类类是对事物抽象的描述。类的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-19T12:47:06.891Z">
+<meta property="og:updated_time" content="2019-11-19T12:55:26.791Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -328,7 +328,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-19T20:47:06+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-19T20:55:26+08:00">
                 2019-11-19
               </time>
             
@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5.3k 字
+                  5.4k 字
                 </span>
               
 
@@ -777,7 +777,7 @@
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Testing</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Bluetooth b = <span class="keyword">new</span> Mouse();</span><br><span class="line">        b.startBlue();</span><br><span class="line">        Mouse m = (Mouse)b;</span><br><span class="line">        m.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Bluetooth</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">startBlue</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mouse</span> <span class="keyword">implements</span> <span class="title">Bluetooth</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"鼠标开始运行"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startBlue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"鼠标蓝牙已连接"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
+<h1 id="3-关键字"><a href="#3-关键字" class="headerlink" title="3. 关键字"></a>3. 关键字</h1><h2 id="3-1-package"><a href="#3-1-package" class="headerlink" title="3.1 package"></a>3.1 package</h2><h2 id="3-2-import"><a href="#3-2-import" class="headerlink" title="3.2 import"></a>3.2 import</h2><h2 id="3-3-this"><a href="#3-3-this" class="headerlink" title="3.3 this"></a>3.3 this</h2><h2 id="3-4-super"><a href="#3-4-super" class="headerlink" title="3.4 super"></a>3.4 super</h2><h2 id="3-5-static"><a href="#3-5-static" class="headerlink" title="3.5 static"></a>3.5 static</h2><h2 id="3-6-instanceof"><a href="#3-6-instanceof" class="headerlink" title="3.6 instanceof"></a>3.6 instanceof</h2><h2 id="3-7-final"><a href="#3-7-final" class="headerlink" title="3.7 final"></a>3.7 final</h2>
       
     </div>
     
@@ -963,7 +963,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-类"><span class="nav-text">1. 类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-属性"><span class="nav-text">1.1 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-方法"><span class="nav-text">1.2 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-参数传递"><span class="nav-text">1.2.1 参数传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-方法重载"><span class="nav-text">1.2.2 方法重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-可变形参"><span class="nav-text">1.2.3 可变形参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-4-方法重写"><span class="nav-text">1.2.4 方法重写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-构造器"><span class="nav-text">1.3 构造器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-代码块"><span class="nav-text">1.4 代码块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-内部类"><span class="nav-text">1.5 内部类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-面向对象三大特征"><span class="nav-text">2. 面向对象三大特征</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-封装"><span class="nav-text">2.1 封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-继承"><span class="nav-text">2.2 继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-多态"><span class="nav-text">2.3 多态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-抽象"><span class="nav-text">2.4 抽象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-接口"><span class="nav-text">2.5 接口</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-类"><span class="nav-text">1. 类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-属性"><span class="nav-text">1.1 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-方法"><span class="nav-text">1.2 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-参数传递"><span class="nav-text">1.2.1 参数传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-方法重载"><span class="nav-text">1.2.2 方法重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-可变形参"><span class="nav-text">1.2.3 可变形参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-4-方法重写"><span class="nav-text">1.2.4 方法重写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-构造器"><span class="nav-text">1.3 构造器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-代码块"><span class="nav-text">1.4 代码块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-内部类"><span class="nav-text">1.5 内部类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-面向对象三大特征"><span class="nav-text">2. 面向对象三大特征</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-封装"><span class="nav-text">2.1 封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-继承"><span class="nav-text">2.2 继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-多态"><span class="nav-text">2.3 多态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-抽象"><span class="nav-text">2.4 抽象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-接口"><span class="nav-text">2.5 接口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-关键字"><span class="nav-text">3. 关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-package"><span class="nav-text">3.1 package</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-import"><span class="nav-text">3.2 import</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-this"><span class="nav-text">3.3 this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-super"><span class="nav-text">3.4 super</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-static"><span class="nav-text">3.5 static</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-instanceof"><span class="nav-text">3.6 instanceof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-7-final"><span class="nav-text">3.7 final</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -997,7 +997,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">10.2k</span>
+    <span title="站点总字数">10.3k</span>
   
 </div>
 
