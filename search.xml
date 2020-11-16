@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>[01] Linux命令与shell脚本</title>
+    <url>/2020/11/17/%5B01%5D%20Linux%E5%91%BD%E4%BB%A4%E4%B8%8Eshell%E8%84%9A%E6%9C%AC/</url>
+    <content><![CDATA[<p>最近学习了《Linux命令行与shell脚本编程大全》这本书，算是系统性的学习了下Linux和Shell的相关知识。二刷书籍，将相关的笔记记录如下。</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Elasticsearch的shrink操作</title>
     <url>/2020/01/01/Elasticsearch%E7%9A%84shrink%E6%93%8D%E4%BD%9C/</url>
     <content><![CDATA[<h1 id="Elasticsearch的shrink操作"><a href="#Elasticsearch的shrink操作" class="headerlink" title="Elasticsearch的shrink操作"></a>Elasticsearch的shrink操作</h1><h2 id="1-场景"><a href="#1-场景" class="headerlink" title="1. 场景"></a>1. 场景</h2><ol>
