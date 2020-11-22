@@ -338,23 +338,82 @@
 <p>示例如下：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> 3940</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> -9 3940</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h2><h3 id="挂载媒体"><a href="#挂载媒体" class="headerlink" title="挂载媒体"></a>挂载媒体</h3><p>使用mount命令，挂在媒体，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mount</span><br></pre></td></tr></table></figure>
 
+<p>默认情况下，mount命令会输出当前系统上挂载的设备列表。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mount</span></span><br><span class="line">/dev/mapper/VolGroup00-LogVol00 on / type ext3 (rw)</span><br><span class="line">proc on /proc type proc (rw)</span><br></pre></td></tr></table></figure>
 
+<p>mount命令提供如下四部分信息：<br> 媒体的设备文件名<br> 媒体挂载到虚拟目录的挂载点<br> 文件系统类型<br> 已挂载媒体的访问状态</p>
+<p>手动挂载媒体设备的命令如下，type指定了磁盘被格式化的文件系统类型</p>
+<p> vfat：Windows长文件系统。<br> ntfs：Windows NT、XP、Vista以及Windows 7中广泛使用的高级文件系统。<br> iso9660：标准CD-ROM文件系统。<br>大多数U盘和软盘会被格式化成vfat文件系统。而数据CD则必须使用iso9660文件系统类型</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mount -t type device directory</span><br></pre></td></tr></table></figure>
 
+<p>示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mount -t vfat /dev/sdb1 /media/disk</span><br></pre></td></tr></table></figure>
 
+<h3 id="卸载媒体"><a href="#卸载媒体" class="headerlink" title="卸载媒体"></a>卸载媒体</h3><p>使用umount命令，卸载媒体，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">umount [directory | device ]</span><br></pre></td></tr></table></figure>
 
+<p>注意：如果有任何程序正在使用设备上的文件，系统就不会允许你卸载它.此时可以使用lsof命令查看它的进程信息，然后停止该进程</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> umount /home/rich/mnt</span></span><br><span class="line">umount: /home/rich/mnt: device is busy</span><br><span class="line">umount: /home/rich/mnt: device is busy</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> lsof /home/rich/mnt</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="查看磁盘空间"><a href="#查看磁盘空间" class="headerlink" title="查看磁盘空间"></a>查看磁盘空间</h3><p>使用df命令，查看磁盘空间，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> df</span></span><br></pre></td></tr></table></figure>
 
+<p>示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> df</span></span><br><span class="line">Filesystem 1K-blocks Used Available Use% Mounted on</span><br><span class="line">/dev/sda1 18251068 7703964 9605024 45% /</span><br></pre></td></tr></table></figure>
 
+<p>使用-h参数，将磁盘空间按照用户易读的形式显示</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> df -h</span></span><br><span class="line">Filesystem Size Used Avail Use% Mounted on</span><br><span class="line">/dev/sdb1 18G 7.4G 9.2G 45% /</span><br></pre></td></tr></table></figure>
 
+<h3 id="查看目录空间"><a href="#查看目录空间" class="headerlink" title="查看目录空间"></a>查看目录空间</h3><p>使用du命令，查看特定目录的磁盘空间，默认时当前目录，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">du</span><br></pre></td></tr></table></figure>
 
+<p>使用-s参数，显示每个输出参数的总计；使用-h，以用户易读形式输出。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> du -sh .</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="处理数据文件"><a href="#处理数据文件" class="headerlink" title="处理数据文件"></a>处理数据文件</h2><h3 id="排序数据"><a href="#排序数据" class="headerlink" title="排序数据"></a>排序数据</h3><p>使用sort命令，对数据进行排序，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sort filename</span><br></pre></td></tr></table></figure>
 
+<p>示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat file2</span></span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">100</span><br><span class="line">45</span><br><span class="line">3</span><br><span class="line">10</span><br><span class="line">145</span><br><span class="line">75</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> sort file2</span></span><br><span class="line">1</span><br><span class="line">10</span><br><span class="line">100</span><br><span class="line">145</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">45</span><br><span class="line">75</span><br></pre></td></tr></table></figure>
 
+<p>使用-n参数，将数字识别成数字而不是字符</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sort -n file2</span></span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">10</span><br><span class="line">45</span><br><span class="line">75</span><br><span class="line">100</span><br><span class="line">145</span><br></pre></td></tr></table></figure>
 
+<h3 id="搜索数据"><a href="#搜索数据" class="headerlink" title="搜索数据"></a>搜索数据</h3><p>使用grep命令，搜索数据，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">grep [options] pattern [file]</span><br></pre></td></tr></table></figure>
 
+<p>示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> grep three file1</span></span><br><span class="line">three</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> grep t file1</span></span><br><span class="line">two</span><br><span class="line">three</span><br></pre></td></tr></table></figure>
 
+<p>使用-v参数，进行反向搜索</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> grep -v t file1</span></span><br><span class="line">one</span><br><span class="line">four</span><br><span class="line">five</span><br></pre></td></tr></table></figure>
 
+<p>使用-n参数，显示匹配的行号</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> grep -n t file1</span></span><br><span class="line">2:two</span><br><span class="line">3:three</span><br></pre></td></tr></table></figure>
+
+<p>使用-c参数，对匹配到的结果进行统计</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> grep -c t file1</span></span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+
+<p>使用-e参数，指定多个匹配模式</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> grep -e t -e f file1</span></span><br><span class="line">two</span><br><span class="line">three</span><br><span class="line">four</span><br><span class="line">five</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩数据"><a href="#压缩数据" class="headerlink" title="压缩数据"></a>压缩数据</h3><p>使用gzip命令，压缩数据，文件扩展名为.gz，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gzip filename</span><br></pre></td></tr></table></figure>
+
+<p>示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gzip myprog</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l my*</span></span><br><span class="line">-rwxrwxr-x 1 rich rich 2197 2007-09-13 11:29 myprog.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="归档数据"><a href="#归档数据" class="headerlink" title="归档数据"></a>归档数据</h3><p>使用tar命令，归档数据，文件扩展名为.tar，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar function [options] object1 object2 ...</span><br></pre></td></tr></table></figure>
+
+<p>示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tar -zcvf test.tar <span class="built_in">test</span>/ test2/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> tar -zxvf test.tar</span></span><br></pre></td></tr></table></figure>
+
+<p>一般的开源软件经常以.tgz结尾，这些是gzip压缩过的tar文件。可以使用如下进行解压：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tar -zxvf filename.tgz -C /opt</span></span><br></pre></td></tr></table></figure>
 
 
 
