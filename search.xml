@@ -11,6 +11,7 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">christine:x:501:501:Christine Bresnahan:/home/christine:/bin/bash</span><br></pre></td></tr></table></figure>
 
 <p>man，英文manual，用来访问帮助手册页面</p>
+<p>下面介绍的都是最基本、最常用的命令，详细的介绍和参数使用，需要使用man进行查看。</p>
 <h2 id="Linux文件系统"><a href="#Linux文件系统" class="headerlink" title="Linux文件系统"></a>Linux文件系统</h2><p>Linux将文件存储在单个目录结构中，这个目录称为虚拟目录，虚拟目录只包含一个根目录的基础目录。例如：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/opt/test.txt</span><br></pre></td></tr></table></figure>
 
@@ -139,6 +140,9 @@
 <p>使用标准通配符进行过滤输出列表，？代表一个字符，*代表零个或多个字符，！表示将不需要的内容排除</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -l my_scr?pt</span></span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:25 my_scrapt</span><br><span class="line">-rwxrw-r-- 1 christine christine 54 May 21 11:26 my_script</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l my*</span></span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:25 my_file</span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:25 my_scrapt</span><br><span class="line">-rwxrw-r-- 1 christine christine 54 May 21 11:26 my_script</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l my_scr[ai]pt</span></span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:25 my_scrapt</span><br><span class="line">-rwxrw-r-- 1 christine christine 54 May 21 11:26 my_script</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l f[a-i]ll</span></span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:44 fall</span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:44 fell</span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:44 fill</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l f[!a]ll</span></span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:44 fell</span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:44 fill</span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:44 full</span><br></pre></td></tr></table></figure>
 
+<p>使用-i参数，查看inode编号，文件或目录的inode编号是一个唯一的数字，由内核分配给文件系统中的每一个对象</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -i *data_file</span></span><br><span class="line">296890 data_file 296891 sl_data_file</span><br></pre></td></tr></table></figure>
+
 <h2 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h2><p>使用touch命令，创建空文件，格式如下：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">touch filename</span><br></pre></td></tr></table></figure>
 
@@ -156,6 +160,48 @@
 
 <p>使用-R参数，递归复制整个目录</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp -R Scripts/ Mod_Scripts</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="自动补全"><a href="#自动补全" class="headerlink" title="自动补全"></a>自动补全</h2><p>使用tab制表键，自动补全内容，在输入文件名或目录名时按制表键，shell将内容补全</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp really_ridiculously_long_file_name Mod_Scripts/</span></span><br><span class="line">输入cp后，按制表键，将剩下的文件名补全</span><br></pre></td></tr></table></figure>
+
+<h2 id="链接文件"><a href="#链接文件" class="headerlink" title="链接文件"></a>链接文件</h2><p>使用ln命令，创建文件链接，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">硬链接：</span><br><span class="line">ln linkFile link</span><br><span class="line">软链接：</span><br><span class="line">ln -s linkFile link</span><br></pre></td></tr></table></figure>
+
+<p>示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ln code_file hl_code_file</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l *code_file</span></span><br><span class="line">-rw-rw-r-- 2 christine christine 189 May 21 17:56 code_file</span><br><span class="line">-rw-rw-r-- 2 christine christine 189 May 21 17:56 hl_code_file</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ln -s data_file sl_data_file</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l *data_file</span></span><br><span class="line">-rw-rw-r-- 1 christine christine 1092 May 21 17:27 data_file</span><br><span class="line">lrwxrwxrwx 1 christine christine 9 May 21 17:29 sl_data_file -&gt; data_file</span><br></pre></td></tr></table></figure>
+
+<h2 id="重命名文件"><a href="#重命名文件" class="headerlink" title="重命名文件"></a>重命名文件</h2><p>使用mv命令，重命名/移动文件或目录，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mv source destination</span><br></pre></td></tr></table></figure>
+
+<p>示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mv fall fzll</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> mv fzll Pictures/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> mv /home/christine/Pictures/fzll /home/christine/fall</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h2><p>使用rm命令，删除文件，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rm filename</span><br></pre></td></tr></table></figure>
+
+<p>示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> rm fall</span></span><br></pre></td></tr></table></figure>
+
+<p>使用-f参数，强制删除；使用-r参数，递归删除</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> rm -rf <span class="built_in">test</span>/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h2><p>使用mkdir命令，创建目录，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir dirname</span><br></pre></td></tr></table></figure>
+
+<p>示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir New_Dir</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ll</span></span><br><span class="line">drwxrwxr-x 2 christine christine 4096 May 22 09:48 New_Dir</span><br></pre></td></tr></table></figure>
+
+<p>使用-p参数，递归创建目录和子目录</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir -p New_Dir/Sub_Dir/Under_Dir</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="删除目录"><a href="#删除目录" class="headerlink" title="删除目录"></a>删除目录</h2><p>使用rmdir命令，删除目录，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rmdir dirname</span><br></pre></td></tr></table></figure>
+
+<p>rmdir默认只删除空目录，一般使用rm -r命令较多</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> rmdir New_Dir</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="查看文件类型"><a href="#查看文件类型" class="headerlink" title="查看文件类型"></a>查看文件类型</h2><p>使用file命令，查看你文件类型，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
