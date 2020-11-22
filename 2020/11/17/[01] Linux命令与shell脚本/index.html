@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="LiuJiNan&#39;s Blog">
 <meta property="og:description" content="最近，大概用了2个星期，学习了《Linux命令行与shell脚本编程大全》(第3版)这本书，加深了平时工作中对相关知识的理解，二刷书籍，将相关的笔记记录如下。 命令演示环境：Linux CentOS 7.6 Bash shell基本命令大多数Linux发行版的默认shell都是GNU bash shell。 如何查看登录用户的shell程序？ 查看&#x2F;etc&#x2F;passwd，该文件包含了系统用户账号和">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-22T11:54:59.384Z">
+<meta property="og:updated_time" content="2020-11-22T12:24:15.702Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -328,7 +328,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-11-22T19:54:59+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-11-22T20:24:15+08:00">
                 2020-11-22
               </time>
             
@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.9k 字
+                  2.3k 字
                 </span>
               
 
@@ -372,7 +372,7 @@
                   <span class="post-meta-item-text">阅读时长&#58;</span>
                 
                 <span title="阅读时长">
-                  8 分钟
+                  9 分钟
                 </span>
               
             </div>
@@ -591,7 +591,57 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> rmdir New_Dir</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="查看文件类型"><a href="#查看文件类型" class="headerlink" title="查看文件类型"></a>查看文件类型</h2><p>使用file命令，查看你文件类型，格式如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file filename</span><br></pre></td></tr></table></figure>
+
+<p>示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> file my_file</span></span><br><span class="line">my_file: ASCII text</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> file New_Dir</span></span><br><span class="line">New_Dir: directory</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> file sl_data_file</span></span><br><span class="line">sl_data_file: symbolic link to 'data_file'</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> file my_script</span></span><br><span class="line">my_script: Bourne-Again shell script, ASCII text executable</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看整个文件"><a href="#查看整个文件" class="headerlink" title="查看整个文件"></a>查看整个文件</h2><p>使用cat命令，查看整个命令，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat filename</span><br></pre></td></tr></table></figure>
+
+<p>示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test1</span></span><br><span class="line">hello</span><br><span class="line">This is a test file.</span><br><span class="line">That we'll use to test the cat command.</span><br></pre></td></tr></table></figure>
+
+<p>使用-n参数，给所有的行加上行号</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat -n test1</span></span><br><span class="line">1 hello</span><br><span class="line">2</span><br><span class="line">3 This is a test file.</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6 That we'll use to test the cat command.</span><br></pre></td></tr></table></figure>
+
+<p>使用-b参数，给有文本的行加上行号</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat -b test1</span></span><br><span class="line">1 hello</span><br><span class="line"></span><br><span class="line">2 This is a test file.</span><br><span class="line"></span><br><span class="line">3 That we'll use to test the cat command.</span><br></pre></td></tr></table></figure>
+
+
+
+<p>使用more命令，分页查看整个文件，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">more filename</span><br></pre></td></tr></table></figure>
+
+<p>按空格键或回车键，按行浏览；按pageup/pagedown，按页浏览；按q键退出。</p>
+<p>使用less命令，分页查看整个文件，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">less filename</span><br></pre></td></tr></table></figure>
+
+<p>按空格键或回车键，按行浏览；按上下键，按行浏览；按pageup/pagedown，按页浏览；按q键退出。</p>
+<h2 id="查看部分文件"><a href="#查看部分文件" class="headerlink" title="查看部分文件"></a>查看部分文件</h2><p>使用tail命令，查看文件最后几行，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail filename</span><br></pre></td></tr></table></figure>
+
+<p>默认，显示文件末尾10行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tail log_file</span></span><br><span class="line">line11</span><br><span class="line">Hello again - line 12</span><br><span class="line">line13</span><br><span class="line">line14</span><br><span class="line">line15</span><br><span class="line">Sweet - line16</span><br><span class="line">line17</span><br><span class="line">line18</span><br><span class="line">line19</span><br><span class="line">Last line - line20</span><br></pre></td></tr></table></figure>
+
+<p>使用-n参数，修改显示的行数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tail -n 2 log_file</span></span><br><span class="line">line19</span><br><span class="line">Last line - line20</span><br></pre></td></tr></table></figure>
+
+<p>使用-f参数，运行在其他进程使用该文件时查看文件内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tail -f log_file</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>使用head命令，查看文件开头几行，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head filename</span><br></pre></td></tr></table></figure>
+
+<p>默认，显示文件开头10行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> head log_file</span></span><br><span class="line">line1</span><br><span class="line">line2</span><br><span class="line">line3</span><br><span class="line">line4</span><br><span class="line">line5</span><br><span class="line">Hello World - line 6</span><br><span class="line">line7</span><br><span class="line">line8</span><br><span class="line">line9</span><br><span class="line">line10</span><br></pre></td></tr></table></figure>
+
+<p>使用-n参数，修改显示的行数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> head -5 log_file</span></span><br><span class="line">line1</span><br><span class="line">line2</span><br><span class="line">line3</span><br><span class="line">line4</span><br><span class="line">line5</span><br></pre></td></tr></table></figure>
+
+
 
 
       
@@ -779,7 +829,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Bash-shell基本命令"><span class="nav-text">Bash shell基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux文件系统"><span class="nav-text">Linux文件系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切换目录"><span class="nav-text">切换目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示当前工作目录"><span class="nav-text">显示当前工作目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示列表"><span class="nav-text">显示列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建文件"><span class="nav-text">创建文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制文件"><span class="nav-text">复制文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动补全"><span class="nav-text">自动补全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链接文件"><span class="nav-text">链接文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重命名文件"><span class="nav-text">重命名文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除文件"><span class="nav-text">删除文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建目录"><span class="nav-text">创建目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除目录"><span class="nav-text">删除目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件类型"><span class="nav-text">查看文件类型</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Bash-shell基本命令"><span class="nav-text">Bash shell基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux文件系统"><span class="nav-text">Linux文件系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切换目录"><span class="nav-text">切换目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示当前工作目录"><span class="nav-text">显示当前工作目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示列表"><span class="nav-text">显示列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建文件"><span class="nav-text">创建文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制文件"><span class="nav-text">复制文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动补全"><span class="nav-text">自动补全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链接文件"><span class="nav-text">链接文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重命名文件"><span class="nav-text">重命名文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除文件"><span class="nav-text">删除文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建目录"><span class="nav-text">创建目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除目录"><span class="nav-text">删除目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件类型"><span class="nav-text">查看文件类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看整个文件"><span class="nav-text">查看整个文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看部分文件"><span class="nav-text">查看部分文件</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -813,7 +863,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">12.7k</span>
+    <span title="站点总字数">13.1k</span>
   
 </div>
 
