@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="最近学习了《Linux命令行与shell脚本编程大全》这本书，算是系统性的学习了下Linux和Shell的相关知识。二刷书籍，将相关的笔记记录如下。">
+<meta name="description" content="最近，大概用了2个星期，学习了《Linux命令行与shell脚本编程大全》(第3版)这本书，加深了平时工作中对相关知识的理解，二刷书籍，将相关的笔记记录如下。 命令演示环境：Linux CentOS 7.6 Bash shell基本命令大多数Linux发行版的默认shell都是GNU bash shell。 如何查看登录用户的shell程序？ 查看&#x2F;etc&#x2F;passwd，该文件包含了系统用户账号和">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[01] Linux命令与shell脚本">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;11&#x2F;17&#x2F;%5B01%5D%20Linux%E5%91%BD%E4%BB%A4%E4%B8%8Eshell%E8%84%9A%E6%9C%AC&#x2F;index.html">
 <meta property="og:site_name" content="LiuJiNan&#39;s Blog">
-<meta property="og:description" content="最近学习了《Linux命令行与shell脚本编程大全》这本书，算是系统性的学习了下Linux和Shell的相关知识。二刷书籍，将相关的笔记记录如下。">
+<meta property="og:description" content="最近，大概用了2个星期，学习了《Linux命令行与shell脚本编程大全》(第3版)这本书，加深了平时工作中对相关知识的理解，二刷书籍，将相关的笔记记录如下。 命令演示环境：Linux CentOS 7.6 Bash shell基本命令大多数Linux发行版的默认shell都是GNU bash shell。 如何查看登录用户的shell程序？ 查看&#x2F;etc&#x2F;passwd，该文件包含了系统用户账号和">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-16T16:24:05.904Z">
+<meta property="og:updated_time" content="2020-11-22T11:22:04.433Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-11-17T00:24:05+08:00">
-                2020-11-17
+              <time title="更新于" itemprop="dateModified" datetime="2020-11-22T19:22:04+08:00">
+                2020-11-22
               </time>
             
           </span>
@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  50 字
+                  1.5k 字
                 </span>
               
 
@@ -372,7 +372,7 @@
                   <span class="post-meta-item-text">阅读时长&#58;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -393,7 +393,160 @@
       
 
       
-        <p>最近学习了《Linux命令行与shell脚本编程大全》这本书，算是系统性的学习了下Linux和Shell的相关知识。二刷书籍，将相关的笔记记录如下。</p>
+        <p>最近，大概用了2个星期，学习了《Linux命令行与shell脚本编程大全》(第3版)这本书，加深了平时工作中对相关知识的理解，二刷书籍，将相关的笔记记录如下。</p>
+<p>命令演示环境：Linux CentOS 7.6</p>
+<h1 id="Bash-shell基本命令"><a href="#Bash-shell基本命令" class="headerlink" title="Bash shell基本命令"></a>Bash shell基本命令</h1><p>大多数Linux发行版的默认shell都是GNU bash shell。</p>
+<p>如何查看登录用户的shell程序？</p>
+<p>查看/etc/passwd，该文件包含了系统用户账号和每个用户的基本配置信息，最后一个字段指定了用户使用的shell程序。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">christine:x:501:501:Christine Bresnahan:/home/christine:/bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>man，英文manual，用来访问帮助手册页面</p>
+<h2 id="Linux文件系统"><a href="#Linux文件系统" class="headerlink" title="Linux文件系统"></a>Linux文件系统</h2><p>Linux将文件存储在单个目录结构中，这个目录称为虚拟目录，虚拟目录只包含一个根目录的基础目录。例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opt/test.txt</span><br></pre></td></tr></table></figure>
+
+<p>Linux的常见目录如下：</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/</td>
+<td>虚拟目录的根目录</td>
+</tr>
+<tr>
+<td>/bin</td>
+<td>二进制目录，存放用户级的GNU工具</td>
+</tr>
+<tr>
+<td>/boot</td>
+<td>启动目录，存放启动文件</td>
+</tr>
+<tr>
+<td>/dev</td>
+<td>设备目录，Linux在这里创建设备节点</td>
+</tr>
+<tr>
+<td>/etc</td>
+<td>系统配置文件目录</td>
+</tr>
+<tr>
+<td>/home</td>
+<td>主目录，Linux在这里创建用户目录</td>
+</tr>
+<tr>
+<td>/lib</td>
+<td>库目录，存放系统和应用程序的库文件</td>
+</tr>
+<tr>
+<td>/media</td>
+<td>媒体目录，可移动媒体设备的常用挂载点</td>
+</tr>
+<tr>
+<td>/mnt</td>
+<td>挂载目录，另一个可移动媒体设备的常用挂载点</td>
+</tr>
+<tr>
+<td>/opt</td>
+<td>可选目录，常用于存放第三方软件包和数据文件</td>
+</tr>
+<tr>
+<td>/proc</td>
+<td>进程目录，存放现有硬件及当前进程的相关信息</td>
+</tr>
+<tr>
+<td>/root</td>
+<td>root用户的主目录</td>
+</tr>
+<tr>
+<td>/sbin</td>
+<td>系统二进制目录，存放许多GNU管理员级工具</td>
+</tr>
+<tr>
+<td>/run</td>
+<td>运行目录，存放系统运作时的运行时数据</td>
+</tr>
+<tr>
+<td>/srv</td>
+<td>服务目录，存放本地服务的相关文件</td>
+</tr>
+<tr>
+<td>/sys</td>
+<td>系统目录，存放系统硬件信息的相关文件</td>
+</tr>
+<tr>
+<td>/tmp</td>
+<td>临时目录，可以在该目录中创建和删除临时工作文件</td>
+</tr>
+<tr>
+<td>/usr</td>
+<td>用户二进制目录，大量用户级的GNU工具和数据文件都存储在这里</td>
+</tr>
+<tr>
+<td>/var</td>
+<td>可变目录，用以存放经常变化的文件，比如日志文件</td>
+</tr>
+</tbody></table>
+<h2 id="切换目录"><a href="#切换目录" class="headerlink" title="切换目录"></a>切换目录</h2><p>使用cd命令，切换到另一个目录，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd destination</span><br></pre></td></tr></table></figure>
+
+<p>destination是要切换的目录名，可以使用绝对文件路径和相对文件路径。</p>
+<p>绝对文件路径：以虚拟目录的根目录开始，相当于目录的全名。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/bin</span><br></pre></td></tr></table></figure>
+
+<p>相对文件路径：基于当前位置的目标文件路径。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd test/</span><br></pre></td></tr></table></figure>
+
+<p>在相对路径中，有两个特殊字符：</p>
+<p>单点符（.），表示当前目录</p>
+<p>双点符（..），表示当前目录的父目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ../test</span><br><span class="line">cd ../../etc</span><br></pre></td></tr></table></figure>
+
+<h2 id="显示当前工作目录"><a href="#显示当前工作目录" class="headerlink" title="显示当前工作目录"></a>显示当前工作目录</h2><p>使用pwd命令，显示当前工作目录，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwd</span><br></pre></td></tr></table></figure>
+
+<p>示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /var/log/test</span><br><span class="line">pwd</span><br><span class="line">/var/log/test</span><br></pre></td></tr></table></figure>
+
+<h2 id="显示列表"><a href="#显示列表" class="headerlink" title="显示列表"></a>显示列表</h2><p>使用ls命令，显示文件列表，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls (destination)</span><br></pre></td></tr></table></figure>
+
+<p>ls命令输出的列表是按字母排序的：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls</span><br><span class="line">Desktop Downloads Music Pictures Templates Videos Documents examples.desktop my_script Public test_file</span><br></pre></td></tr></table></figure>
+
+<p>使用-F参数区分文件和目录，在目录名的后面加了正斜线（/），在可执行文件的后面加了星号(*)，在普通文件的后面没有加任何东西：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -F</span></span><br><span class="line">Desktop/ Downloads/ Music/ Pictures/ Templates/ Videos/ Documents/ examples.desktop my_script* Public/ test_file</span><br></pre></td></tr></table></figure>
+
+<p>使用-a参数显示隐藏文件，Linux的隐藏文件通常是以点号开始的文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -a</span></span><br><span class="line">. .compiz Music test_file .. .config</span><br></pre></td></tr></table></figure>
+
+<p>使用-l参数显示长列表，每行包含的信息如下：</p>
+<p> 文件类型，比如目录（d）、文件（-）、字符型文件（c）或块设备（b）<br> 文件的权限<br> 文件的硬链接总数<br> 文件属主的用户名<br> 文件属组的组名<br> 文件的大小（以字节为单位）<br> 文件的上次修改时间<br> 文件名或目录名</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ls -l</span><br><span class="line">total 5</span><br><span class="line">drwxr-xr-x 2 christine christine 4096 Apr 22 20:37 Desktop</span><br><span class="line">drwxr-xr-x 2 christine christine 4096 Apr 22 20:37 Documents</span><br><span class="line">drwxr-xr-x 2 christine christine 4096 Apr 22 20:37 Downloads</span><br><span class="line">-rw-r--r-- 1 christine christine 8980 Apr 22 13:36 examples.desktop</span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:44 fall</span><br></pre></td></tr></table></figure>
+
+<p>使用标准通配符进行过滤输出列表，？代表一个字符，*代表零个或多个字符，！表示将不需要的内容排除</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -l my_scr?pt</span></span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:25 my_scrapt</span><br><span class="line">-rwxrw-r-- 1 christine christine 54 May 21 11:26 my_script</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l my*</span></span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:25 my_file</span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:25 my_scrapt</span><br><span class="line">-rwxrw-r-- 1 christine christine 54 May 21 11:26 my_script</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l my_scr[ai]pt</span></span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:25 my_scrapt</span><br><span class="line">-rwxrw-r-- 1 christine christine 54 May 21 11:26 my_script</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l f[a-i]ll</span></span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:44 fall</span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:44 fell</span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:44 fill</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l f[!a]ll</span></span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:44 fell</span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:44 fill</span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 13:44 full</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h2><p>使用touch命令，创建空文件，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch filename</span><br></pre></td></tr></table></figure>
+
+<p>touch命令创建了新文件，并将命令调用者的用户名作为文件的属主</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> touch test_one</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l test_one</span></span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 14:17 test_one</span><br></pre></td></tr></table></figure>
+
+<p>如果文件已经存在，touch可以用来来改变文件的修改时间</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -l test_one</span></span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 14:17 test_one</span><br><span class="line"><span class="meta">$</span><span class="bash"> touch test_one</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l test_one</span></span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 14:35 test_one</span><br></pre></td></tr></table></figure>
+
+<h2 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h2><p>使用cp命令，复制文件或目录，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp source destination</span><br></pre></td></tr></table></figure>
+
+<p>当source和destination参数都是文件名时，cp命令将源文件复制成一个新文件，并且以destination命名</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp test_one test_two</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l test_*</span></span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 14:35 test_one</span><br><span class="line">-rw-rw-r-- 1 christine christine 0 May 21 15:15 test_two</span><br></pre></td></tr></table></figure>
+
+<p>使用-R参数，递归复制整个目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp -R Scripts/ Mod_Scripts</span></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -486,8 +639,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -562,6 +724,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Bash-shell基本命令"><span class="nav-text">Bash shell基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux文件系统"><span class="nav-text">Linux文件系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切换目录"><span class="nav-text">切换目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示当前工作目录"><span class="nav-text">显示当前工作目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示列表"><span class="nav-text">显示列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建文件"><span class="nav-text">创建文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制文件"><span class="nav-text">复制文件</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -589,7 +767,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">10.8k</span>
+    <span title="站点总字数">12.3k</span>
   
 </div>
 
