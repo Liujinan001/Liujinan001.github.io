@@ -5,6 +5,7 @@
     <url>/2020/11/17/%5B01%5D%20Linux%E5%91%BD%E4%BB%A4%E4%B8%8Eshell%E8%84%9A%E6%9C%AC/</url>
     <content><![CDATA[<p>最近，大概用了2个星期，学习了《Linux命令行与shell脚本编程大全》(第3版)这本书，加深了平时工作中对相关知识的理解，二刷书籍，将相关的笔记记录如下。</p>
 <p>命令演示环境：Linux CentOS 7.6</p>
+<p>命令与脚本都是实用技能，理论技能较少</p>
 <h1 id="Bash-shell基本命令"><a href="#Bash-shell基本命令" class="headerlink" title="Bash shell基本命令"></a>Bash shell基本命令</h1><p>大多数Linux发行版的默认shell都是GNU bash shell。</p>
 <p>如何查看登录用户的shell程序？</p>
 <p>查看/etc/passwd，该文件包含了系统用户账号和每个用户的基本配置信息，最后一个字段指定了用户使用的shell程序。</p>
@@ -528,7 +529,25 @@
 <p>$HOME/.profile</p>
 <p>注意，这个列表中并没有$HOME/.bashrc文件。这是因为该文件通常通过其他文件运行的。</p>
 <h4 id="环境变量持久化"><a href="#环境变量持久化" class="headerlink" title="环境变量持久化"></a>环境变量持久化</h4><p>存储个人用户永久性bash shell变量的地方是$HOME/.bashrc文件</p>
-]]></content>
+<h3 id="数组变量"><a href="#数组变量" class="headerlink" title="数组变量"></a>数组变量</h3><p>环境变量可作为数组使用，要给某个环境变量设置多个值，可以把值放在括号里，值与值之间用空格分隔。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mytest=(one two three four five)</span></span><br></pre></td></tr></table></figure>
+
+<p>要引用一个单独的数组元素，就必须用代表它在数组中位置的数值索引值。索引值要用方括号括起来。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;mytest[2]&#125;</span></span></span><br><span class="line">three</span><br></pre></td></tr></table></figure>
+
+<p>要显示整个数组变量，可用星号作为通配符放在索引值的位置。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;mytest[*]&#125;</span></span></span><br><span class="line">one two three four five</span><br></pre></td></tr></table></figure>
+
+<p>可以改变某个索引值位置的值</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mytest[2]=seven</span></span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;mytest[*]&#125;</span></span></span><br><span class="line">one two seven four five</span><br></pre></td></tr></table></figure>
+
+<p>用unset命令删除数组中的某个值，删除该索引位置元素，其他位置不变</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">unset</span> mytest[2]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;mytest[*]&#125;</span></span></span><br><span class="line">one two four five</span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;mytest[2]&#125;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;mytest[3]&#125;</span></span></span><br><span class="line">four</span><br></pre></td></tr></table></figure>
+
+<p>在unset命令后跟上数组名来删除整个数组</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">unset</span> mytest</span></span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;mytest[*]&#125;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Linux文件权限"><a href="#Linux文件权限" class="headerlink" title="Linux文件权限"></a>Linux文件权限</h2>]]></content>
       <categories>
         <category>Linux</category>
       </categories>
