@@ -269,7 +269,9 @@
 <h3 id="实时监测进程"><a href="#实时监测进程" class="headerlink" title="实时监测进程"></a>实时监测进程</h3><p>使用top命令，实时监测进程，格式如下：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">top</span><br></pre></td></tr></table></figure>
 
-<p> 示例如下：![image][image1] </p>
+<p> 示例如下：</p>
+<img src="/2020/11/17/%5B01%5D%20Linux%E5%91%BD%E4%BB%A4%E4%B8%8Eshell%E8%84%9A%E6%9C%AC/1.jpg" style="zoom:70%;">
+
 <p>top命令记录的有效信息如下：</p>
 <p>第一行显示了当前时间、系统的运行时间、登录的用户数以及系统的平均负载。平均负载有3个值：最近1分钟的、最近5分钟的和最近15分钟的平均负载。值越大说明系统的负载越高。</p>
 <p>第二行显示了有多少进程处在运行、休眠、停止或是僵尸状态。top命令显示的进程叫作task。</p>
@@ -418,7 +420,8 @@
 <h2 id="shell的父子关系"><a href="#shell的父子关系" class="headerlink" title="shell的父子关系"></a>shell的父子关系</h2><p>用于登录某个虚拟控制器终端或在GUI中运行终端仿真器时所启动的默认的交互shell，是一个父shell。本书到目前为止都是父shell提供CLI提示符，然后等待命令输入。在CLI提示符后输入/bin/bash命令或其他等效的bash命令时，会创建一个新的shell程序。这个shell程序被称为子shell（child shell）</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ps -f</span></span><br><span class="line">UID PID PPID C STIME TTY TIME CMD</span><br><span class="line">501 1841 1840 0 11:50 pts/0 00:00:00 -bash</span><br><span class="line">501 2532 1841 1 14:22 pts/0 00:00:00 ps -f</span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ps --forest</span></span><br><span class="line">PID TTY TIME CMD</span><br><span class="line">1841 pts/0 00:00:00 bash</span><br><span class="line">2533 pts/0 00:00:00 \_ bash</span><br><span class="line">2546 pts/0 00:00:00 \_ bash</span><br><span class="line">2562 pts/0 00:00:00 \_ bash</span><br><span class="line">2576 pts/0 00:00:00 \_ ps</span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ps -f</span></span><br><span class="line">UID PID PPID C STIME TTY TIME CMD</span><br><span class="line">501 1841 1840 0 11:50 pts/0 00:00:00 -bash</span><br><span class="line">501 2533 1841 0 14:22 pts/0 00:00:00 bash</span><br><span class="line">501 2546 2533 0 14:22 pts/0 00:00:00 bash</span><br><span class="line">501 2562 2546 0 14:24 pts/0 00:00:00 bash</span><br><span class="line">501 2585 2562 1 14:29 pts/0 00:00:00 ps -f</span><br></pre></td></tr></table></figure>
 
-<p>![image][image2]</p>
+<img src="/2020/11/17/%5B01%5D%20Linux%E5%91%BD%E4%BB%A4%E4%B8%8Eshell%E8%84%9A%E6%9C%AC/2.jpg" style="zoom:70%;">
+
 <p>使用exit命令，退出子shell，或退出当前的虚拟控制台终端或终端仿真器。格式如下：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure>
 
