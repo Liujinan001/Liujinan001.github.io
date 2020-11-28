@@ -478,6 +478,56 @@
 <p>使用-p参数，查看当前可用的别名</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">alias</span> -p</span></span><br><span class="line">[...]</span><br><span class="line">alias egrep='egrep --color=auto'</span><br><span class="line">alias fgrep='fgrep --color=auto'</span><br><span class="line">alias grep='grep --color=auto'</span><br><span class="line">alias l='ls -CF'</span><br><span class="line">alias la='ls -A'</span><br></pre></td></tr></table></figure>
 
+<h2 id="Linux环境变量"><a href="#Linux环境变量" class="headerlink" title="Linux环境变量"></a>Linux环境变量</h2><p>在bash shell中，环境变量分为两类：全局变量和局部变量</p>
+<p>全局变量：对于shell会话和所有生成的子shell都是可见的。</p>
+<p>局部变量：只对创建它们的shell可见。</p>
+<p>使用命令env或printenv，查看全局变量</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> printenv</span></span><br><span class="line">HOSTNAME=server01.class.edu</span><br><span class="line">SELINUX_ROLE_REQUESTED=</span><br><span class="line">TERM=xterm</span><br><span class="line">SHELL=/bin/bash</span><br><span class="line">HISTSIZE=1000</span><br><span class="line">[...]</span><br></pre></td></tr></table></figure>
+
+<p>引用环境变量，，必须在变量前面加上一个美元符（$）</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$HOME</span></span></span><br><span class="line">/home/Christine</span><br></pre></td></tr></table></figure>
+
+<p>在Linux系统并没有一个只显示局部环境变量的命令。</p>
+<p>set命令会显示为某个特定进程设置的所有环境变量，包括局部变量、全局变量以及用户定义变量。</p>
+<h3 id="设置用户自定义变量"><a href="#设置用户自定义变量" class="headerlink" title="设置用户自定义变量"></a>设置用户自定义变量</h3><h4 id="设置局部用户定义变量"><a href="#设置局部用户定义变量" class="headerlink" title="设置局部用户定义变量"></a>设置局部用户定义变量</h4><p>可以通过等号给环境变量赋值，值可以是数值或字符串，变量名、等号和值之间没有空格</p>
+<p>示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> my_variable=Hello</span></span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$my_variable</span></span></span><br><span class="line">Hello</span><br></pre></td></tr></table></figure>
+
+<p>要给变量赋一个含有空格的字符串值，必须用单引号来界定字符串的首和尾</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> my_variable=<span class="string">"Hello World"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$my_variable</span></span></span><br><span class="line">Hello World</span><br></pre></td></tr></table></figure>
+
+<p>局部环境变量用的是小写字母，系统环境变量都是大写字母</p>
+<h4 id="设置全局环境变量"><a href="#设置全局环境变量" class="headerlink" title="设置全局环境变量"></a>设置全局环境变量</h4><p>在设定全局环境变量的进程所创建的子进程中，该变量都是可见的</p>
+<p>创建全局环境变量的方法是先创建一个局部环境变量，然后再把它导出到全局环境中。</p>
+<p>这个过程通过export命令来完成，变量名前面不需要加$</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> my_variable=<span class="string">"I am Global now"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">export</span> my_variable</span></span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$my_variable</span></span></span><br><span class="line">I am Global now</span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$my_variable</span></span></span><br><span class="line">I am Global now</span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">exit</span></span></span><br><span class="line">exit</span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$my_variable</span></span></span><br><span class="line">I am Global now</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除环境变量"><a href="#删除环境变量" class="headerlink" title="删除环境变量"></a>删除环境变量</h3><p>使用unset命令删除环境变量。在unset命令中引用环境变量时，记住不要使用$。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$my_variable</span></span></span><br><span class="line">I am Global now</span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">unset</span> my_variable</span></span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$my_variable</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br></pre></td></tr></table></figure>
+
+<p>在涉及环境变量名时，如果要使用环境变量，就用$；如果要操作环境变量，就不用$</p>
+<h3 id="默认的shell环境变量"><a href="#默认的shell环境变量" class="headerlink" title="默认的shell环境变量"></a>默认的shell环境变量</h3><p>默认情况下，bash shell会用一些特定的环境变量来定义系统环境。这些变量在你的Linux系<br>统上都已经设置好了，只管放心使用</p>
+<h3 id="设置PATH环境变量"><a href="#设置PATH环境变量" class="headerlink" title="设置PATH环境变量"></a>设置PATH环境变量</h3><p>当在shell命令行界面中输入一个外部命令时，shell必须搜索系统来找到对应的程序。</p>
+<p>PATH环境变量定义了用于进行命令和程序查找的目录</p>
+<p>如果命令或者程序的位置没有包括在PATH变量中，那么如果不使用绝对路径的话，shell是没法找到的</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$PATH</span></span></span><br><span class="line">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:</span><br><span class="line">/sbin:/bin:/usr/games:/usr/local/games</span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> PATH=<span class="variable">$PATH</span>:/home/christine/Scripts</span></span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$PATH</span></span></span><br><span class="line">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/</span><br><span class="line">games:/usr/local/games:/home/christine/Scripts</span><br><span class="line"><span class="meta">$</span><span class="bash"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> myprog</span></span><br><span class="line">The factorial of 5 is 120.</span><br></pre></td></tr></table></figure>
+
+<h3 id="定位系统环境变量"><a href="#定位系统环境变量" class="headerlink" title="定位系统环境变量"></a>定位系统环境变量</h3><p>怎样让环境变量的作用持久化？</p>
+<h4 id="登录shell"><a href="#登录shell" class="headerlink" title="登录shell"></a>登录shell</h4><p>当你登录Linux系统时，bash shell会作为登录shell启动。登录shell会从5个不同的启动文件里读取命令：<br> /etc/profile<br> $HOME/.bash_profile<br> $HOME/.bashrc<br> $HOME/.bash_login<br> $HOME/.profile<br>/etc/profile文件是系统上默认的bash shell的主启动文件。系统上的每个用户登录时都会执行这个启动文件。</p>
+<ol>
+<li>/etc/profile</li>
+</ol>
+<p>/etc/profile文件是bash shell默认的的主启动文件。</p>
+<ol start="2">
+<li>$HOME目录下的启动文件</li>
+</ol>
+<p>大多数Linux发行版只用这四个启动文件中的一到两个：<br> $HOME/.bash_profile<br> $HOME/.bashrc<br> $HOME/.bash_login<br> ​$HOME/.profile<br>注意，这四个文件都以点号开头，这说明它们是隐藏文件，所以每个用户都可以编辑这些文件并添加自己的环境变量，这些环境变量会在每次启动bash shell会话时生效。</p>
+<p>shell会按照按照下列顺序，运行第一个被找到的文件，余下的则被忽略：</p>
+<p>$HOME/.bash_profile</p>
+<p>$HOME/.bash_login</p>
+<p>$HOME/.profile</p>
+<p>注意，这个列表中并没有$HOME/.bashrc文件。这是因为该文件通常通过其他文件运行的。</p>
+<h4 id="环境变量持久化"><a href="#环境变量持久化" class="headerlink" title="环境变量持久化"></a>环境变量持久化</h4><p>存储个人用户永久性bash shell变量的地方是$HOME/.bashrc文件</p>
 ]]></content>
       <categories>
         <category>Linux</category>
