@@ -1,6 +1,548 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>[01] Shell脚本编程</title>
+    <url>/2021/02/22/%5B01%5D%20Shell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[<p>最近，大概用了2个星期，学习了《Linux命令行与shell脚本编程大全》(第3版)这本书，加深了平时工作中对相关知识的理解，二刷书籍，将相关的笔记记录如下。</p>
+<p>命令演示环境：Linux CentOS 7.6</p>
+<p>命令与脚本都是实用技能，理论技能较少</p>
+<p>Shell脚本的基本操作过程是：创建shell脚本，编写脚本内容，增加执行权限，执行shell脚本。</p>
+<p>如下命令，演示hello.sh脚本，脚本的作用是在控制台打印”Hello World !”。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">1. 创建hello.sh脚本</span><br><span class="line"><span class="meta">$</span><span class="bash"> touch hello.sh</span></span><br><span class="line"></span><br><span class="line">2. 编写脚本内容</span><br><span class="line"><span class="meta">$</span><span class="bash"> vi hello.sh</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> This script displays Hello World.</span></span><br><span class="line">echo "Hello World !"</span><br><span class="line"></span><br><span class="line">3. 保存脚本并退出</span><br><span class="line">:wq</span><br><span class="line"></span><br><span class="line">4. 为脚本增加可执行权限</span><br><span class="line"><span class="meta">$</span><span class="bash"> chmod u+x hello.sh</span></span><br><span class="line"></span><br><span class="line">5. 执行shell脚本</span><br><span class="line"><span class="meta">$</span><span class="bash"> ./hello.sh</span></span><br><span class="line"></span><br><span class="line">6. 脚本输出如下结果</span><br><span class="line">Hello World !</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建脚本</strong></p>
+<ol>
+<li>使用文本编辑器，如vi/vim，创建.sh文件</li>
+<li>脚本文件第一行指定要使用的shell(使用bash shell)，格式为：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>脚本中使用#编写注释，除了以#！开头的第一行</li>
+<li>shell根据命令在文件中出现的顺序进行处理</li>
+</ol>
+<p><strong>执行脚本</strong></p>
+<ol>
+<li>在创建脚本时，umask值决定了新文件的默认权限，根据需要对应修改相关权限</li>
+<li>拥有可执行权限的脚本，通过如下命令执行脚本呢：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">bash xx.sh</span><br><span class="line">./xx.sh</span><br></pre></td></tr></table></figure>
+
+<p><strong>显示消息</strong></p>
+<p>使用echo + 字符串，显示文本信息：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">echo "This is a test"</span><br></pre></td></tr></table></figure>
+
+<p>echo打印的字符串可以使用单引号或双引号，解决引号冲突的问题：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">echo "This is a test to see if you're paying attention"</span><br><span class="line">echo 'Rich says "scripting is easy"'</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用变量</strong></p>
+<p><strong>环境变量</strong></p>
+<p>使用set命令查看当前环境变量：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">set</span></span></span><br><span class="line"></span><br><span class="line">BASH=/bin/bash</span><br><span class="line">CLASSPATH=.:/opt/jdk1.8.0_281/lib:/opt/jdk1.8.0_281/jre/lib:</span><br><span class="line">HADOOP_HOME=/opt/hadoop-3.1.4</span><br><span class="line">HIVE_HOME=/opt/hive-3.1.1</span><br></pre></td></tr></table></figure>
+
+<p>在shell脚本中，使用”$”引用变量：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">echo "Hadoop home is $HADOOP_HOME"</span><br></pre></td></tr></table></figure>
+
+<p>“$”符号用于引用其他变量，如果想要使用实际的美元符，需要使用”&quot;进行转义：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"The price is \$15"</span></span></span><br><span class="line">The price is $15</span><br></pre></td></tr></table></figure>
+
+<p>在实际使用时，一般将变量放在”{}”里面：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">echo "Hadoop home is $&#123;HADOOP_HOME&#125;"</span><br></pre></td></tr></table></figure>
+
+<p><strong>用户变量</strong></p>
+<p>用户变量名规则：</p>
+<ol>
+<li>任意字母、数字和下划线的组合</li>
+<li>长度不超过20个</li>
+<li>区分大小写</li>
+</ol>
+<p>用户变量定义：</p>
+<ol>
+<li>变量=值</li>
+<li>变量，等号，值之间不能有空格</li>
+<li>shell脚本自动决定变量值的数据类型</li>
+<li>shell脚本执行结束后，用户变量会被删除</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">value1=10</span><br><span class="line">value2=$value1</span><br><span class="line">echo "value2 is $value2"</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">value2 is 10</span><br></pre></td></tr></table></figure>
+
+<p><strong>命令替换</strong></p>
+<p>将命令的执行结果赋值给变量，有两种方式：</p>
+<ol>
+<li>``</li>
+<li>$()</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">value1=`date`</span><br><span class="line">value2=$(date)</span><br><span class="line">echo "value1 is $value1"</span><br><span class="line">echo "value2 is $value2"</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">Sun Mar  7 23:33:24 CST 2021</span><br><span class="line">Sun Mar  7 23:33:24 CST 2021</span><br></pre></td></tr></table></figure>
+
+<p>常用的使用方式：</p>
+<p>获取当前日期，生成唯一的文件名</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">today=$(date +%y%m%d)</span><br><span class="line">ls /opt -al &gt; log.$today</span><br></pre></td></tr></table></figure>
+
+<p>注意点：</p>
+<ol>
+<li>命令替换本质是创建一个子shell运行对应的命令，所以无法使用脚本中的用户变量的</li>
+</ol>
+<p><strong>重定向输入和输出</strong></p>
+<p><strong>输出重定向</strong></p>
+<p>最常用的是将命令的输出重定向到文件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> date &gt; test.txt</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> cat test.txt</span></span><br><span class="line">Sun Mar  7 23:53:51 CST 2021</span><br></pre></td></tr></table></figure>
+
+<p>注意点：</p>
+<ol>
+<li>如果文件不存在，会创建文件，默认权限由umask决定</li>
+<li>如果文件存在，新文件会覆盖旧文件</li>
+</ol>
+<p><strong>输入重定向</strong></p>
+<p>最常用的是将文件的内容重定向到命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.txt</span></span><br><span class="line">test string 1</span><br><span class="line">test string 2</span><br><span class="line">test string 3</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> wc &lt; test.txt</span></span><br><span class="line"> 3  9 42</span><br></pre></td></tr></table></figure>
+
+<p>wc用于对文本进行计数，默认会输入3个值：</p>
+<ol>
+<li>文本的行数</li>
+<li>文本的次数</li>
+<li>文本的字节数</li>
+</ol>
+<p>最常用的使用方式是内联输入重定向，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">command &lt;&lt; marker</span><br><span class="line">data</span><br><span class="line">marker</span><br></pre></td></tr></table></figure>
+
+<p>marker是文本标记，任何字符串都可以作为文本标记，但是数据的开始和结尾的文本标记必须一致</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wc &lt;&lt; EOF</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> TEST 1</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> TEST 2</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> TEST 3</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> EOF</span></span><br><span class="line"> 3  6 21</span><br></pre></td></tr></table></figure>
+
+<p><strong>管道</strong></p>
+<p>将一个命令的输出作为另一个命令得输入，格式为</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">command1 | command2</span><br></pre></td></tr></table></figure>
+
+<p>实际得运行顺序是：Linux同时运行两个命令，第一个命令产生得输出，立即送给第二个命令，数据传输无中间文件或缓冲区</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> rpm -qa | sort | more</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>数学运算</strong></p>
+<p>shell中有两种方式进行数学运算：</p>
+<ol>
+<li>使用expr命令</li>
+<li>使用方括号</li>
+</ol>
+<p>使用expr命令较笨拙，例如使用”*”需要进行转义，所以使用的最多的是方括号的形式，格式为：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[value1 operator value2]</span><br></pre></td></tr></table></figure>
+
+<p>注意点：</p>
+<ol>
+<li>运算符两侧必须空格</li>
+<li>不支持浮点数运算</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">var1=100</span><br><span class="line">var2=50</span><br><span class="line">var3=45</span><br><span class="line">var4=$[$var1 * ($var2 - $var3)]</span><br><span class="line">echo "var4 is $var4"</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">var4 is 500</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">var1=100</span><br><span class="line">var2=45</span><br><span class="line">var3=$[$var1 / $var2]</span><br><span class="line">echo "var3 is $var3"</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">var3 is 2</span><br></pre></td></tr></table></figure>
+
+<p>如果想要使用浮点数计算，可以使用linux的内建计算器bc，其小数精度由参数scale控制，默认是0，格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo "options; expression" | bc</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">var1=100</span><br><span class="line">var2=45</span><br><span class="line">var3=$(echo "scale=4; $var1 / $var2" | bc)</span><br><span class="line">echo "var3 is $var3"</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">var3 is 2.2222</span><br></pre></td></tr></table></figure>
+
+<p><strong>退出脚本</strong></p>
+<p><strong>退出状态码</strong></p>
+<p>shell中运行的每条命令执行完都存在一个退出状态码，退出状态码是1个0~255的整数</p>
+<p>使用”$?”查看上一个已执行命令的状态码，执行成功正常退出的状态码为0，执行有错误的状态码就是非0：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> date</span></span><br><span class="line">Mon Mar  8 23:07:37 CST 2021</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> $?</span></span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<p>linux的状态码没有标准，但是有一些可以进行参考，状态码126表示无执行权限，状态码127表示无效命令。</p>
+<p><strong>exit命令</strong></p>
+<p>默认情况下，shell脚本以最后一个命令的退出状态码退出</p>
+<p>可以使用exit命令，用户指定1个退出状态码</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">var1=100</span><br><span class="line">var2=45</span><br><span class="line">var3=$[$var1 / $var2]</span><br><span class="line">echo "var3 is $var3"</span><br><span class="line">exit 5</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">var3 is 2</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> $?</span></span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+
+
+
+<p>接下来讲解使用结构化命令：</p>
+<p><strong>if-then语句</strong></p>
+<p>格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if command</span><br><span class="line">then</span><br><span class="line">    commands</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">或</span><br><span class="line"></span><br><span class="line">if command; then</span><br><span class="line">  commands</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>解释如下：</p>
+<p>如果command命令执行的退出状态码是0，则执行then中的commands语句；如果command命令执行的退出状态码非0，则不会执行then中的语句。此处通过command的退出状态码进行条件控制，这与java，python的if语句有很大区别。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">if pwd</span><br><span class="line">then</span><br><span class="line">    echo "Successed"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">Successed</span><br></pre></td></tr></table></figure>
+
+<p><strong>if-then-else语句</strong></p>
+<p>格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if command</span><br><span class="line">then</span><br><span class="line">    commands</span><br><span class="line">else</span><br><span class="line">    commands</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>解释如下：</p>
+<p>如果command命令执行的退出状态码是0，则执行then中的commands语句；如果command命令执行的退出状态码非0，则执行else中的commands语句。</p>
+<p><strong>嵌套if语句</strong></p>
+<p>格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if command1</span><br><span class="line">then</span><br><span class="line">    commands</span><br><span class="line">elif command2</span><br><span class="line">then</span><br><span class="line">    commands</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>解释如下：</p>
+<p>如果command1命令执行的退出状态码是0，则执行commands1中的语句；如果command2命令执行的退出状态码是0，则继续执行commands2中的语句。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">testuser=NoSuchUser</span><br><span class="line">if grep $testuser /etc/passwd</span><br><span class="line">then</span><br><span class="line">    echo "The user $testuser exists on this system."</span><br><span class="line">elif ls -d /home/$testuser</span><br><span class="line">then</span><br><span class="line">    echo "The user $testuser does not exist on this system."</span><br><span class="line">    echo "However, $testuser has a directory."</span><br><span class="line">else</span><br><span class="line">    echo "The user $testuser does not exist on this system."</span><br><span class="line">    echo "$testuser does not have a directory."</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">The user NoSuchUser does not exist on this system.</span><br><span class="line">However, NoSuchUser has a directory.</span><br></pre></td></tr></table></figure>
+
+<p>注意点：</p>
+<ol>
+<li>在elif语句中，紧跟着的else语句属于elif代码块，不属于之前的if-then代码块</li>
+</ol>
+<p><strong>条件判断</strong></p>
+<p>shell中的条件判断有两种方式：test condition；[ condition ]。最常用的是第二种方式。</p>
+<p>test命令，格式：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if test condition</span><br><span class="line">then</span><br><span class="line">    commands</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>解释如下：</p>
+<p>如果condition条件成立，test condition命令执行的退出状态码是0；如果condition条件不成立，test condition命令执行的退出状态码是非0；如果不写condition，test命令执行的退出状态码是非0。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">if test</span><br><span class="line">then</span><br><span class="line">    echo "True"</span><br><span class="line">else</span><br><span class="line">    echo "False"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">False</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">my_variable="Full"</span><br><span class="line">if test $my_variable</span><br><span class="line">then</span><br><span class="line">    echo "True"</span><br><span class="line">else</span><br><span class="line">    echo "False"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+
+<p>[ condition ]命令，格式：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if [ condition ]</span><br><span class="line">then</span><br><span class="line">    commands</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>注意点：</p>
+<ol>
+<li>这种方式是shell最常用的条件判断</li>
+<li>方括号的condition，与左右两个括号之间必须有1个空格</li>
+</ol>
+<p>条件判断可以进行3类判断：</p>
+<ol>
+<li>数值比较</li>
+<li>字符串比较</li>
+<li>文件比较</li>
+</ol>
+<p><strong>数值比较</strong></p>
+<p>限制条件：</p>
+<ol>
+<li>shell的数值比较只能处理整数</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>比较</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>n1 -eq n2</td>
+<td>equal，n1是否<strong>等于</strong>n2</td>
+</tr>
+<tr>
+<td>n1 -ge n2</td>
+<td>greater equal，n1是否<strong>大于等于</strong>n2</td>
+</tr>
+<tr>
+<td>n1 -le n2</td>
+<td>less equal，n1是否<strong>小于等于</strong>n2</td>
+</tr>
+<tr>
+<td>n1 -gt n2</td>
+<td>greater than，n1是否<strong>大于</strong>n2</td>
+</tr>
+<tr>
+<td>n1 -lt n2</td>
+<td>less than，n1是否<strong>小于</strong>n2</td>
+</tr>
+<tr>
+<td>n1 -ne n2</td>
+<td>not equal，n1是否<strong>不等于</strong>n2</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">value1=10</span><br><span class="line">value2=11</span><br><span class="line">if [ $value1 -eq $value2 ]</span><br><span class="line">then</span><br><span class="line">    echo "True"</span><br><span class="line">else</span><br><span class="line">    echo "False"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">False</span><br></pre></td></tr></table></figure>
+
+<p><strong>字符串比较</strong></p>
+<table>
+<thead>
+<tr>
+<th>比较</th>
+<th>解释</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>str1 = str2</td>
+<td>str1是否和str2相同</td>
+<td>字符串相等性</td>
+</tr>
+<tr>
+<td>str1 != str2</td>
+<td>str1是否和str2不同</td>
+<td>字符串相等性</td>
+</tr>
+<tr>
+<td>str1 &lt; str2</td>
+<td>str1是否比str2小</td>
+<td>字符串顺序</td>
+</tr>
+<tr>
+<td>str1 &gt; str2</td>
+<td>str1是否比str2大</td>
+<td>字符串顺序</td>
+</tr>
+<tr>
+<td>-n str1</td>
+<td>str1的长度是否非0</td>
+<td>字符串大小</td>
+</tr>
+<tr>
+<td>-z str1</td>
+<td>str1的长度是否为0</td>
+<td>字符串大小</td>
+</tr>
+</tbody></table>
+<ol>
+<li>字符串相等性</li>
+</ol>
+<p>在比较字符串相等性时，会将所有的标点和大小写全部考虑在内。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">testuser=rich</span><br><span class="line">if [ $USER = $testuser ]</span><br><span class="line">then</span><br><span class="line">    echo "True"</span><br><span class="line">else</span><br><span class="line">    echo "False"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>字符串顺序</li>
+</ol>
+<p>在使用字符串顺序比较时，”&gt;”和”&lt;”必须使用转义，否则会被当成重定向符号；比较使用的是标准的ACSII顺序，大写字母小于小写字母。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">val1=Testing</span><br><span class="line">val2=testing</span><br><span class="line">if [ $val1 \&gt; $val2 ]</span><br><span class="line">then</span><br><span class="line">    echo "True"</span><br><span class="line">else</span><br><span class="line">    echo "False"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">False</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>字符串大小</li>
+</ol>
+<p>使用-n和-z检查字符串是否为空。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">val1=Testing</span><br><span class="line">val2=''</span><br><span class="line">if [ -n $val1 ]</span><br><span class="line">then</span><br><span class="line">    echo "True"</span><br><span class="line">else</span><br><span class="line">    echo "False"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+
+<p><strong>文件比较</strong></p>
+<p>文件比较是shell特有的，强大且使用最多的比较方式。</p>
+<table>
+<thead>
+<tr>
+<th>比较</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-d file</td>
+<td>file是否存在并且为目录</td>
+</tr>
+<tr>
+<td>-f file</td>
+<td>file是否存在并且为文件</td>
+</tr>
+<tr>
+<td>-e file</td>
+<td>file是否存在，file可以是文件或目录</td>
+</tr>
+<tr>
+<td>-s file</td>
+<td>file是否存在并且非空</td>
+</tr>
+<tr>
+<td>-r file</td>
+<td>file是否存在并且可读</td>
+</tr>
+<tr>
+<td>-w file</td>
+<td>file是否存在并且可写</td>
+</tr>
+<tr>
+<td>-x file</td>
+<td>file是否存在并且可执行</td>
+</tr>
+<tr>
+<td>-O file</td>
+<td>file是否存在并且所属主为当前用户</td>
+</tr>
+<tr>
+<td>-G file</td>
+<td>file是否存在并且所属组为当前用户</td>
+</tr>
+<tr>
+<td>file1 -nt file2</td>
+<td>file1是否比file2新</td>
+</tr>
+<tr>
+<td>file1 -ot file2</td>
+<td>file1是否比file2旧</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">dir=/opt/test</span><br><span class="line">if [ -d $dir ]</span><br><span class="line">then</span><br><span class="line">    echo "Exist"</span><br><span class="line">else</span><br><span class="line">    echo "Not exist"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">Exist</span><br></pre></td></tr></table></figure>
+
+<p><strong>复合条件</strong></p>
+<p>可以使用布尔逻辑构造复合条件，有如下两种布尔运算：</p>
+<ol>
+<li>[ condition ] &amp;&amp; [ condition ]</li>
+<li>[ condition ] || [ condition ]</li>
+</ol>
+<p>解释如下：</p>
+<ol>
+<li>第一种为AND布尔运算</li>
+<li>第二种为OR布尔运算</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">dir=/opt/test</span><br><span class="line">if [ -d $dir ] &amp;&amp; [ -w $HOME/testing ]</span><br><span class="line">then</span><br><span class="line">    echo "True"</span><br><span class="line">else</span><br><span class="line">    echo "False"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+
+<p><strong>if-then的高级特性</strong></p>
+<p>if-then语句中可以使用两种高级特性：</p>
+<ol>
+<li>双括号：高级数学表达式</li>
+<li>双方括号：高级字符串处理</li>
+</ol>
+<p><strong>双括号</strong></p>
+<p>格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">(( expression ))</span><br></pre></td></tr></table></figure>
+
+<p>expression可以是高级数学表达式，如下：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>val++</td>
+<td>后增</td>
+</tr>
+<tr>
+<td>val–</td>
+<td>后减</td>
+</tr>
+<tr>
+<td>++val</td>
+<td>前增</td>
+</tr>
+<tr>
+<td>–val</td>
+<td>前减</td>
+</tr>
+<tr>
+<td>!</td>
+<td>逻辑取反</td>
+</tr>
+<tr>
+<td>~</td>
+<td>位求反</td>
+</tr>
+<tr>
+<td>**</td>
+<td>幂运算</td>
+</tr>
+<tr>
+<td>&lt;&lt;</td>
+<td>左位移</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>右位移</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>位布尔与</td>
+</tr>
+<tr>
+<td>|</td>
+<td>位布尔或</td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td>逻辑与</td>
+</tr>
+<tr>
+<td>||</td>
+<td>逻辑或</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">val1=10</span><br><span class="line">if (( $val1 ** 2 &gt; 90 ))</span><br><span class="line">then</span><br><span class="line">    (( val2 = $val1 ** 2 ))</span><br><span class="line">    echo $val2</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">100</span><br></pre></td></tr></table></figure>
+
+<p><strong>双方括号</strong></p>
+<p>格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[[ expression ]]</span><br></pre></td></tr></table></figure>
+
+<p>双方括号可以进行模式匹配，使用”==”进行模式匹配。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">if [[ $USER == r* ]]</span><br><span class="line">then</span><br><span class="line">    echo "True"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+
+<p><strong>case语句</strong></p>
+<p>格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">case variable in</span><br><span class="line">pattern1 | pattern2) command1;;</span><br><span class="line">pattern3) command2;;</span><br><span class="line">*) command3;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+<p>解释如下：</p>
+<ol>
+<li>判断variable的值与pattern1-3哪一个匹配，匹配后执行对应语句</li>
+<li>pattern1-3如果都没有匹配的，则执行*号后面的语句</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">case $USER in</span><br><span class="line">rich | barba)</span><br><span class="line">    echo "User in rich or barba"</span><br><span class="line">testing)</span><br><span class="line">    echo "User is testing"</span><br><span class="line">*)</span><br><span class="line">    echo "Not allow"</span><br><span class="line">esac</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">User is testing</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>Shell</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>[01] Linux命令与shell脚本</title>
     <url>/2020/11/17/%5B01%5D%20Linux%E5%91%BD%E4%BB%A4%E4%B8%8Eshell%E8%84%9A%E6%9C%AC/</url>
     <content><![CDATA[<p>最近，大概用了2个星期，学习了《Linux命令行与shell脚本编程大全》(第3版)这本书，加深了平时工作中对相关知识的理解，二刷书籍，将相关的笔记记录如下。</p>
