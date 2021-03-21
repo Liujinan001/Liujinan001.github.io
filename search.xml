@@ -464,76 +464,57 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<p><strong>for语句</strong></p>
+<p>for循环的格式：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">for var in list</span><br><span class="line">do</span><br><span class="line">    commands</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>解释如下：</p>
+<ol>
+<li>list参数提供迭代中要使用的一系列值</li>
+<li>每次迭代时，var代表列表中的当前值</li>
+<li>默认每个值以空格进行分割</li>
+</ol>
+<p><strong>读取列表中的值</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">for test in ShangHai ShenZhen WuHan</span><br><span class="line">do</span><br><span class="line">    echo "The city is $test"</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">for test in "Shang Hai" "Shen Zhen" "Guang Zhou"</span><br><span class="line">do</span><br><span class="line">    echo "The city is $test"</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">list="ShangHai ShenZhen WuHan"</span><br><span class="line">list=$list" HeBei"</span><br><span class="line">for test in $list</span><br><span class="line">do</span><br><span class="line">    echo "The city is $test"</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">The city is ShangHai</span><br><span class="line">The city is ShenZhen</span><br><span class="line">The city is WuHan</span><br><span class="line">The city is HeBei</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ol>
+<li>常用的字符串拼接方式，如上示例所示</li>
+</ol>
+<p><strong>读取文件中的值</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat list.txt</span></span><br><span class="line">ShangHai</span><br><span class="line">ShenZhen</span><br><span class="line">WuHan</span><br><span class="line">HeBei</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">for test in $(cat list.txt)</span><br><span class="line">do</span><br><span class="line">    echo "The city is $test"</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">The city is ShangHai</span><br><span class="line">The city is ShenZhen</span><br><span class="line">The city is WuHan</span><br><span class="line">The city is HeBei</span><br></pre></td></tr></table></figure>
+
+<p>Linux中存在一个特殊的环境变量IFS，内部字段分隔符。默认情况下，会将如下3个字符当成字段分隔符：</p>
+<ol>
+<li>空格</li>
+<li>制表符</li>
+<li>换行符</li>
+</ol>
+<p>当bash shell处理数据时，识别到如上3种字符，会假定是新数据字段的开始。</p>
+<p>如果在处理数据的时候，想要更换字段分隔符或者指定唯一的字段分隔符，可以将IFS进行赋值。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">IFS=$'\n'</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat list.txt</span></span><br><span class="line">ShangHai</span><br><span class="line">ShenZhen</span><br><span class="line">WuHan</span><br><span class="line">HeBei TianJin</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">IFS=$'\n'</span><br><span class="line">for test in $(cat list.txt)</span><br><span class="line">do</span><br><span class="line">    echo "The city is $test"</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">The city is ShangHai</span><br><span class="line">The city is ShenZhen</span><br><span class="line">The city is WuHan</span><br><span class="line">The city is HeBei TianJin</span><br></pre></td></tr></table></figure>
+
+<p>以下是十分常用的场景：</p>
+<ol>
+<li>在shell脚本中，某一个位置需要修改IFS的值</li>
+<li>然后忽略本次的修改，在其他地方沿用默认的IFS值</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">IFS.OLD=$IFS</span><br><span class="line">IFS=$'\n'</span><br><span class="line">&lt;使用新值IFS的shell代码&gt;</span><br><span class="line">IFS=$IFS.OLD</span><br></pre></td></tr></table></figure>
+
+<p>如果想要使用多个字段分隔符，可以使用字符串拼接的方式：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">IFS=$'\n':,"</span><br></pre></td></tr></table></figure>
+
+<p>解释如下：</p>
+<ol>
+<li>将换行符，冒号，逗号，双引号当作字段分隔符</li>
+</ol>
+<p><strong>C语言风格的for语句</strong></p>
 ]]></content>
       <categories>
         <category>Shell</category>
