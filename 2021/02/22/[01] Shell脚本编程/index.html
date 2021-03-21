@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="LiuJiNan&#39;s Blog">
 <meta property="og:description" content="最近，大概用了2个星期，学习了《Linux命令行与shell脚本编程大全》(第3版)这本书，加深了平时工作中对相关知识的理解，二刷书籍，将相关的笔记记录如下。 命令演示环境：Linux CentOS 7.6 命令与脚本都是实用技能，理论技能较少 Shell脚本的基本操作过程是：创建shell脚本，编写脚本内容，增加执行权限，执行shell脚本。 如下命令，演示hello.sh脚本，脚本的作用是在控">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-03-21T08:50:05.868Z">
+<meta property="og:updated_time" content="2021-03-21T09:22:11.826Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -328,7 +328,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-03-21T16:50:05+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2021-03-21T17:22:11+08:00">
                 2021-03-21
               </time>
             
@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3.5k 字
+                  3.8k 字
                 </span>
               
 
@@ -372,7 +372,7 @@
                   <span class="post-meta-item-text">阅读时长&#58;</span>
                 
                 <span title="阅读时长">
-                  14 分钟
+                  16 分钟
                 </span>
               
             </div>
@@ -905,6 +905,41 @@
 <li>将换行符，冒号，逗号，双引号当作字段分隔符</li>
 </ol>
 <p><strong>C语言风格的for语句</strong></p>
+<p>格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for (( variable assignment; condition; iteration process ))</span><br></pre></td></tr></table></figure>
+
+<p>C语言风格的for语句没有遵循bash shell标准的for命令：</p>
+<ol>
+<li>变量赋值可以有空格</li>
+<li>条件中的变量不以美元符开头</li>
+<li>迭代中的算式不适用expr命令</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">for (( i=1; i&lt;=10; i++ ))</span><br><span class="line">do</span><br><span class="line">    echo "$i"</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">for (( i=1, j=10; i&lt;=10; i++, b-- ))</span><br><span class="line">do</span><br><span class="line">    echo "$i $j"</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">1 10</span><br><span class="line">2 9</span><br><span class="line">3 8</span><br><span class="line">4 7</span><br><span class="line">5 6</span><br><span class="line">6 5</span><br><span class="line">7 4</span><br><span class="line">8 3</span><br><span class="line">9 2</span><br><span class="line">10 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>while语句</strong></p>
+<p>格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while test commands</span><br><span class="line">do</span><br><span class="line">    commands</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>while语句在shell中一般使用较少，简单举例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">var1=5</span><br><span class="line">while [ $var1 -gt 0 ]</span><br><span class="line">do</span><br><span class="line">    echo "$var1"</span><br><span class="line">    var1=$[ $var1 - 1 ]</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">5</span><br><span class="line">4</span><br><span class="line">3</span><br><span class="line">2</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<p><strong>until语句</strong></p>
+<p>格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">until test commands</span><br><span class="line">do</span><br><span class="line">    commands</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>until语句在shell中一般使用较少，简单举例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">var1=5</span><br><span class="line">while [ $var1 -eq 0 ]</span><br><span class="line">do</span><br><span class="line">    echo "$var1"</span><br><span class="line">    var1=$[ $var1 - 1 ]</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">5</span><br><span class="line">4</span><br><span class="line">3</span><br><span class="line">2</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<p><strong>嵌套循环</strong></p>
+<p>循环语句内部再使用循环语句就构成了嵌套循环。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">IFS.OLD=$IFS</span><br><span class="line">IFS=$'\n'</span><br><span class="line">for entry in $(cat /etc/passwd)</span><br><span class="line">do</span><br><span class="line">    echo "The entry is $entry"</span><br><span class="line">    IFS=:</span><br><span class="line">    for value in $entry</span><br><span class="line">    do</span><br><span class="line">        echo "The value is $value"</span><br><span class="line">    done</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">The entry is rich:x:501:501:Rich:/home/rich:/bin/bash</span><br><span class="line">The value is rich</span><br><span class="line">The value is x</span><br><span class="line">The value is 501</span><br><span class="line">The value is 501</span><br><span class="line">The value is Rich</span><br><span class="line">The value is /home/rich</span><br><span class="line">The value is /bin/bash</span><br><span class="line">The entry is kat:x:502:502:Kat:/home/kat:/bin/bash</span><br><span class="line">The value is kat</span><br><span class="line">The value is x</span><br><span class="line">The value is 502</span><br><span class="line">The value is 502</span><br><span class="line">The value is Kat</span><br><span class="line">The value is /home/kat</span><br><span class="line">The value is /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p><strong>控制循环</strong></p>
+<p>使用break和continue可以控制循环。</p>
+<p><strong>break命令</strong></p>
+<p><strong>continue命令</strong></p>
 
       
     </div>
@@ -1100,7 +1135,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">20.8k</span>
+    <span title="站点总字数">21.1k</span>
   
 </div>
 
