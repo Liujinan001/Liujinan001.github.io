@@ -549,7 +549,51 @@
 <p><strong>控制循环</strong></p>
 <p>使用break和continue可以控制循环。</p>
 <p><strong>break命令</strong></p>
+<p>break命令用于跳出循环，默认跳出1级循环，也就是当前循环，使用break n跳出n级循环。</p>
+<p>跳出当前循环：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">for var1 in 1 2 3 4 5</span><br><span class="line">do</span><br><span class="line">    if [ $var1 -eq 3 ]</span><br><span class="line">    then</span><br><span class="line">        break</span><br><span class="line">    fi</span><br><span class="line">    echo "The value is $var1"</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">The value is 1</span><br><span class="line">The value is 2</span><br></pre></td></tr></table></figure>
+
+<p>跳出n级循环：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">break n</span><br></pre></td></tr></table></figure>
+
+<p>n指的是要跳出的循环层级，默认是1，也就是当前循环。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">for (( a=1; a&lt;4; a++ ))</span><br><span class="line">do</span><br><span class="line">    echo "The value is $a"</span><br><span class="line">    for (( b=1; b&lt;100; b++ ))</span><br><span class="line">    do</span><br><span class="line">        if [ $b -gt 4 ]</span><br><span class="line">        then</span><br><span class="line">            break 2</span><br><span class="line">        fi</span><br><span class="line">        echo "The value is $b"</span><br><span class="line">    done</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">The value is 1</span><br><span class="line">The value is 1</span><br><span class="line">The value is 2</span><br><span class="line">The value is 3</span><br></pre></td></tr></table></figure>
+
 <p><strong>continue命令</strong></p>
+<p>continue命令用于提前终止某次循环，但是不会终止整个循环。</p>
+<p>终止当前循环：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">for (( a=1; a&lt;15; a++ ))</span><br><span class="line">do</span><br><span class="line">    if [ $a -gt 5 ] &amp;&amp; [ $a -lt 10 ]</span><br><span class="line">    then</span><br><span class="line">        continue</span><br><span class="line">    fi</span><br><span class="line">    echo "$a"</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td></tr></table></figure>
+
+<p>终止n级循环：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">continue n</span><br></pre></td></tr></table></figure>
+
+<p>n指的是要终止的循环层级，默认是1，也就是当前循环。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">for (( a=1; a&lt;=5; a++ ))</span><br><span class="line">do</span><br><span class="line">    echo "The value is $a"</span><br><span class="line">    for (( b=1; b&lt;3; b++ ))</span><br><span class="line">    do</span><br><span class="line">        if [ $a -gt 2 ] &amp;&amp; [ $a -lt 4 ]</span><br><span class="line">        then</span><br><span class="line">            continue 2</span><br><span class="line">        fi</span><br><span class="line">        echo "The value is $b"</span><br><span class="line">    done</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">The value is 1</span><br><span class="line">The value is 1</span><br><span class="line">The value is 2</span><br><span class="line">The value is 2</span><br><span class="line">The value is 1</span><br><span class="line">The value is 2</span><br><span class="line">The value is 3</span><br><span class="line">The value is 4</span><br><span class="line">The value is 1</span><br><span class="line">The value is 2</span><br><span class="line">The value is 5</span><br><span class="line">The value is 1</span><br><span class="line">The value is 2</span><br></pre></td></tr></table></figure>
+
+<p><strong>处理循环的输出</strong></p>
+<p>可以对循环的输出使用管道或者进行重定向，格式是在done的后面添加命令</p>
+<p>解释：</p>
+<ol>
+<li>将for循环的执行结果进行重定向或者使用管道进行二次处理</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">for (( a=1; a&lt;=5; a++ ))</span><br><span class="line">do</span><br><span class="line">    echo "The value is $a"</span><br><span class="line">    for (( b=1; b&lt;3; b++ ))</span><br><span class="line">    do</span><br><span class="line">        if [ $a -gt 2 ] &amp;&amp; [ $a -lt 4 ]</span><br><span class="line">        then</span><br><span class="line">            continue 2</span><br><span class="line">        fi</span><br><span class="line">        echo "The value is $b"</span><br><span class="line">    done</span><br><span class="line">done &gt; output.txt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">for (( a=1; a&lt;=5; a++ ))</span><br><span class="line">do</span><br><span class="line">    echo "The value is $a"</span><br><span class="line">    for (( b=1; b&lt;3; b++ ))</span><br><span class="line">    do</span><br><span class="line">        if [ $a -gt 2 ] &amp;&amp; [ $a -lt 4 ]</span><br><span class="line">        then</span><br><span class="line">            continue 2</span><br><span class="line">        fi</span><br><span class="line">        echo "The value is $b"</span><br><span class="line">    done</span><br><span class="line">done | sort</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ]]></content>
       <categories>
         <category>Shell</category>
