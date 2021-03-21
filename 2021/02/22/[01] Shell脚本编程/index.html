@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="LiuJiNan&#39;s Blog">
 <meta property="og:description" content="最近，大概用了2个星期，学习了《Linux命令行与shell脚本编程大全》(第3版)这本书，加深了平时工作中对相关知识的理解，二刷书籍，将相关的笔记记录如下。 命令演示环境：Linux CentOS 7.6 命令与脚本都是实用技能，理论技能较少 Shell脚本的基本操作过程是：创建shell脚本，编写脚本内容，增加执行权限，执行shell脚本。 如下命令，演示hello.sh脚本，脚本的作用是在控">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-03-21T09:47:15.944Z">
+<meta property="og:updated_time" content="2021-03-21T15:13:47.409Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -328,7 +328,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-03-21T17:47:15+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2021-03-21T23:13:47+08:00">
                 2021-03-21
               </time>
             
@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4.3k 字
+                  5.4k 字
                 </span>
               
 
@@ -372,7 +372,7 @@
                   <span class="post-meta-item-text">阅读时长&#58;</span>
                 
                 <span title="阅读时长">
-                  19 分钟
+                  23 分钟
                 </span>
               
             </div>
@@ -970,6 +970,206 @@
 
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">for (( a=1; a&lt;=5; a++ ))</span><br><span class="line">do</span><br><span class="line">    echo "The value is $a"</span><br><span class="line">    for (( b=1; b&lt;3; b++ ))</span><br><span class="line">    do</span><br><span class="line">        if [ $a -gt 2 ] &amp;&amp; [ $a -lt 4 ]</span><br><span class="line">        then</span><br><span class="line">            continue 2</span><br><span class="line">        fi</span><br><span class="line">        echo "The value is $b"</span><br><span class="line">    done</span><br><span class="line">done | sort</span><br></pre></td></tr></table></figure>
 
+<p><strong>处理用户输入</strong></p>
+<p><strong>命令行参数</strong></p>
+<p>向shell脚本中传递数据的最基本方式是使用命令行参数。</p>
+<p>shell中存在位置参数变量，位置参数变量是标准的数字，$0是脚本名，$1是第一个参数，$2是第二个参数，依此类推，直到第九个参数$9。</p>
+<ol>
+<li>$1-$9位置参数变量紧跟在脚本后面</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh rich</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>位置参数变量之间以空格进行分割</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh 10 30</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>位置参数变量中存在特殊字符时，需要使用单引号或双引号</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh <span class="string">'Rich Blum'</span> <span class="string">'Tom'</span></span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>第10+个位置参数变量，以${number}引用，一般输入的参数要求小于9个</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">total=$[ $&#123;10&#125; * $&#123;11&#125; ]</span><br><span class="line">echo "$total"</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>$0是脚本名，如果是使用的绝对路径，那么返回的也是绝对路径</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">echo "$0"</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">test.sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">echo "$0"</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash /opt/test.sh</span></span><br><span class="line">/opt/test.sh</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>使用basename与$0一起获取不包含绝对路径的脚本名</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">name=$(basename $0)</span><br><span class="line">echo "$name"</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash /opt/test.sh</span></span><br><span class="line">test.sh</span><br></pre></td></tr></table></figure>
+
+<p><strong>特殊参数变量</strong></p>
+<ol>
+<li>使用$#统计输入参数个数</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">echo "$#"</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh a b c</span></span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>使用$<em>和$@获取所有的输入参数，$\</em>会将所有参数当作一个单词，$@会将所有参数当作同一个字符串中的多个独立的单词</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">for param in "$*"</span><br><span class="line">do</span><br><span class="line">    echo "$param"</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh a b c</span></span><br><span class="line">a b c</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">for param in "$@"</span><br><span class="line">do</span><br><span class="line">    echo "$param"</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh a b c</span></span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line">c</span><br></pre></td></tr></table></figure>
+
+<p><strong>移动变量</strong></p>
+<p>使用shift命令操作命令行输入参数，shift会根据参数的相对位置来移动命令行参数。</p>
+<p>默认情况下，shift会将参数向左移动一个位置。例如：变量$3的值会移动到$2，变量$2的值会移动到$1，变量$1的值会被删除，$0的值不会改变，始终是脚本名。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">echo</span><br><span class="line">count=1</span><br><span class="line">while [ -n "$1" ]</span><br><span class="line">do</span><br><span class="line">    echo "$count = $1"</span><br><span class="line">    count=$[ $count + 1 ]</span><br><span class="line">    shift</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh a b c</span></span><br><span class="line">1=a</span><br><span class="line">2=b</span><br><span class="line">3=c</span><br></pre></td></tr></table></figure>
+
+<p><strong>处理选项</strong></p>
+<p>使用getopt命令，处理命令行选项和参数。格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getopt optstring parameters</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> getopt ab:<span class="built_in">cd</span> -a -b test1 -<span class="built_in">cd</span> test2 test3</span></span><br><span class="line">-a -b test1 -c -d -- test2 test3</span><br></pre></td></tr></table></figure>
+
+<p>解释如下：</p>
+<ol>
+<li>定义了4个有效选项字母：a，b，c，d</li>
+<li>冒号放在b的后面，表示b选项需要一个参数</li>
+<li>–是shell中表示选项列表结束</li>
+</ol>
+<p><strong>将选项标准化</strong></p>
+<p>在shell中存在一些常用的命令行选项的常用含义。</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>显示所有对象</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>生成一个计数</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>指定一个目录</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>扩展一个对象</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>指定读入数据的文件</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>显示命令的帮助信息</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>忽略大小写</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>产生输出的长格式版本</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>使用非交互模式</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>将所有的输出重定向到指定的文件</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>以安静模式运行</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>递归处理目录和文件</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>以安静模式运行</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>生成详细输出</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>排除某个对象</td>
+</tr>
+<tr>
+<td>-y</td>
+<td>对所有回答yes</td>
+</tr>
+</tbody></table>
+<p><strong>获得用户的输入</strong></p>
+<p>使用read命令从标准输入(键盘)接受输入。格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">read variable</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">echo -n "Enter your name: "</span><br><span class="line">read name</span><br><span class="line">echo "Hello $name"</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">Enter your name: Tom</span><br><span class="line">Hello Tom</span><br></pre></td></tr></table></figure>
+
+<p>使用read -p直接指定提示符</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash </span></span><br><span class="line">read -p "Enter your name: " name</span><br><span class="line">echo "Hello $name"</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">Enter your name: Tom</span><br><span class="line">Hello Tom</span><br></pre></td></tr></table></figure>
+
+<p>也可以在read中不指定变量，那么会将所有接受到的数据存储到特殊的变量REPLY中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash </span></span><br><span class="line">read -p "Enter your name: "</span><br><span class="line">echo "Hello $REPLY"</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">Enter your name: Tom</span><br><span class="line">Hello Tom</span><br></pre></td></tr></table></figure>
+
+<p>使用-t选项，指定read命令的等待时间，如果计数器过期，read命令会以非0的状态码退出</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash </span></span><br><span class="line">read -t 5 -p "Enter your name: "</span><br><span class="line">echo "Hello $REPLY"</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">Enter your name: Tom</span><br><span class="line">Hello Tom</span><br></pre></td></tr></table></figure>
+
+<p>使用-s选项，将read的输入隐藏，不打印在控制台(实际是将文本的颜色设置成与背景色一致)，例如密码的输入。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat test.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash </span></span><br><span class="line">read -s -t 5 -p "Enter your name: "</span><br><span class="line">echo "Hello $REPLY"</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash test.sh</span></span><br><span class="line">Enter your name: Tom</span><br><span class="line">Hello Tom</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1179,7 +1379,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">21.6k</span>
+    <span title="站点总字数">22.7k</span>
   
 </div>
 
