@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Ambari," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="&#x2F;&#x2F; TODO 引言 如下Ambari的源码，只讲述其功能实现逻辑，对于其架构，在其他章节阐述。 Ambari的版本位Apache Ambari 2.7.5，HDP 使用rpm包安装完ambari-server以后，可以通过如下命令对ambari-server进行操作： 1ambari-server &amp;lt;options&amp;gt;  &amp;lt;options&amp;gt; 存在如下操作：     命令">
+<meta name="keywords" content="Ambari">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ambari源码">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2021&#x2F;04&#x2F;16&#x2F;Ambari%E6%BA%90%E7%A0%81&#x2F;index.html">
+<meta property="og:site_name" content="LiuJiNan&#39;s Blog">
+<meta property="og:description" content="&#x2F;&#x2F; TODO 引言 如下Ambari的源码，只讲述其功能实现逻辑，对于其架构，在其他章节阐述。 Ambari的版本位Apache Ambari 2.7.5，HDP 使用rpm包安装完ambari-server以后，可以通过如下命令对ambari-server进行操作： 1ambari-server &amp;lt;options&amp;gt;  &amp;lt;options&amp;gt; 存在如下操作：     命令">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-04-15T17:17:12.374Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/04/16/Ambari源码/"/>
+
+
+
+
+
+  <title>Ambari源码 | LiuJiNan's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LiuJiNan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/16/Ambari%E6%BA%90%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiuJiNan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LiuJiNan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ambari源码</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-16T00:00:00+08:00">
+                2021-04-16
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-04-16T01:17:12+08:00">
+                2021-04-16
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长&#58;</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p> // TODO 引言</p>
+<p>如下Ambari的源码，只讲述其功能实现逻辑，对于其架构，在其他章节阐述。</p>
+<p>Ambari的版本位Apache Ambari 2.7.5，HDP</p>
+<p>使用rpm包安装完ambari-server以后，可以通过如下命令对ambari-server进行操作：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ambari-server &lt;options&gt;</span><br></pre></td></tr></table></figure>
+
+<p>&lt;options&gt; 存在如下操作： </p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>start</td>
+<td>启动</td>
+</tr>
+<tr>
+<td>stop</td>
+<td>停止</td>
+</tr>
+<tr>
+<td>reset</td>
+<td></td>
+</tr>
+<tr>
+<td>restart</td>
+<td>重启</td>
+</tr>
+<tr>
+<td>upgrade</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>状态</td>
+</tr>
+<tr>
+<td>upgradestack</td>
+<td></td>
+</tr>
+<tr>
+<td>setup</td>
+<td></td>
+</tr>
+<tr>
+<td>setup-jce</td>
+<td></td>
+</tr>
+<tr>
+<td>setup-ldap</td>
+<td></td>
+</tr>
+<tr>
+<td>sync-ldap</td>
+<td></td>
+</tr>
+<tr>
+<td>set-current</td>
+<td></td>
+</tr>
+<tr>
+<td>setup-security</td>
+<td></td>
+</tr>
+<tr>
+<td>refresh-stack-hash</td>
+<td></td>
+</tr>
+<tr>
+<td>backup</td>
+<td></td>
+</tr>
+<tr>
+<td>restore</td>
+<td></td>
+</tr>
+<tr>
+<td>update-host-names</td>
+<td></td>
+</tr>
+<tr>
+<td>check-database</td>
+<td></td>
+</tr>
+<tr>
+<td>enable-stack</td>
+<td></td>
+</tr>
+<tr>
+<td>setup-sso</td>
+<td></td>
+</tr>
+<tr>
+<td>setup-trusted-proxy</td>
+<td></td>
+</tr>
+<tr>
+<td>db-purge-history</td>
+<td></td>
+</tr>
+<tr>
+<td>install-mpack</td>
+<td></td>
+</tr>
+<tr>
+<td>uninstall-mpack</td>
+<td></td>
+</tr>
+<tr>
+<td>upgrade-mpack</td>
+<td></td>
+</tr>
+<tr>
+<td>setup-kerberos</td>
+<td></td>
+</tr>
+<tr>
+<td>setup-pam</td>
+<td></td>
+</tr>
+<tr>
+<td>migrate-ldap-pam</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>其对应的是一个可执行文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apache-ambari-2.7.5-src/ambari-server/sbin/ambari-server</span><br></pre></td></tr></table></figure>
+
+<p>中文部分为我自己加的注释：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/env bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig: 345 95 20</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> description: ambari-server daemon</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> processname: ambari-server</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Licensed to the Apache Software Foundation (ASF) under one</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> or more contributor license agreements.  See the NOTICE file</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> distributed with this work <span class="keyword">for</span> additional information</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> regarding copyright ownership.  The ASF licenses this file</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> to you under the Apache License, Version 2.0 (the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="string">"License"</span>); you may not use this file except <span class="keyword">in</span> compliance</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> with the License.  You may obtain a copy of the License at</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">     http://www.apache.org/licenses/LICENSE-2.0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Unless required by applicable law or agreed to <span class="keyword">in</span> writing, software</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> distributed under the License is distributed on an <span class="string">"AS IS"</span> BASIS,</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> See the License <span class="keyword">for</span> the specific language governing permissions and</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> limitations under the License.</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">## BEGIN INIT INFO</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Provides:          ambari-server</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Required-Start:    <span class="variable">$local_fs</span> <span class="variable">$remote_fs</span> <span class="variable">$network</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Required-Start:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Required-Stop:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Default-Start:     2 3 4 5</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Default-Stop:      0 6</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">## END INIT INFO</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> /etc/init.d/ambari-server </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 一般在脚本文件的开头</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 作用：脚本遇到错误时停止执行，并返回错误的行数信息 </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> -u == <span class="built_in">set</span> -o nounset</span></span><br><span class="line">set -u # fail on unset variables</span><br><span class="line">VERSION="$&#123;ambariFullVersion&#125;"</span><br><span class="line">HASH="$&#123;buildNumber&#125;"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> </span></span><br><span class="line">case "$&#123;1:-&#125;" in</span><br><span class="line">  --version)</span><br><span class="line">        echo -e $VERSION</span><br><span class="line">        exit 0</span><br><span class="line">        ;;</span><br><span class="line">  --hash)</span><br><span class="line">        echo -e $HASH</span><br><span class="line">        exit 0</span><br><span class="line">        ;;</span><br><span class="line">esac</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> BASH_SOURCE[0] 等价于 BASH_SOURCE， 返回当前执行的shell文件所在的路径及文件名，常用于<span class="built_in">source</span>脚本时</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如下为常用命令，用于获取脚本所在的绝对路径</span></span><br><span class="line">SCRIPT_DIR="$( cd "$( dirname "$&#123;BASH_SOURCE[0]&#125;" )" &amp;&amp; pwd )"</span><br><span class="line"><span class="meta">#</span><span class="bash"> the below line (ROOT=<span class="string">"/"</span>) is replaced by install-helper.sh. Don<span class="string">'t edit/remove it.</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将ROOT变量中的<span class="string">'/'</span>替换为<span class="string">''</span>，即空字符串，sed中间的分隔符可以使用其他字符，如这里使用的时<span class="string">'$'</span></span></span><br><span class="line">ROOT="/"</span><br><span class="line">ROOT=`echo $ROOT | sed 's/\/$//'`</span><br><span class="line">export ROOT</span><br><span class="line"></span><br><span class="line">export PATH=$ROOT/usr/lib/ambari-server/*:$PATH:/sbin/:/usr/sbin</span><br><span class="line">export AMBARI_CONF_DIR=$ROOT/etc/ambari-server/conf</span><br><span class="line"></span><br><span class="line">PYTHON_WRAP="$ROOT/usr/bin/ambari-python-wrap"</span><br><span class="line">AMBARI_ENV="$ROOT/var/lib/ambari-server/ambari-env.sh"</span><br><span class="line">AMBARI_PYTHON_EXECUTABLE="$ROOT/usr/sbin/ambari-server.py"</span><br><span class="line">AMBARI_EXECUTABLE="$ROOT/usr/sbin/ambari-server"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> -u显示用户ID，-u -n连用显示用户名，例如使用root用户执行的ambari-server，id -u -n显示的就是root</span></span><br><span class="line">current_user=`id -u -n`</span><br><span class="line"><span class="meta">#</span><span class="bash"> sudo的-l表示列出所有权限，-S没有查到用法，查看sudo的usage也没有，用处存疑？</span></span><br><span class="line">echo "" | sudo -S -l &gt; /dev/null 2&gt;&amp;1</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断上一条结果是否执行成功，euid等于0表示具有root权限</span></span><br><span class="line">if [ "$?" != "0" ] &amp;&amp; [ "$EUID" -ne 0 ] ; then</span><br><span class="line"> echo "You can't perform this operation as non-sudoer user. Please re-login or configure sudo access for this user."</span><br><span class="line"> exit -1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> </span></span><br><span class="line">if [ -z "$&#123;PYTHON:-&#125;" ] ; then</span><br><span class="line">  export PYTHON=`readlink $PYTHON_WRAP`</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ -a "$AMBARI_ENV" ]; then</span><br><span class="line">  set +u # temporary disable variables checking for env</span><br><span class="line">  . "$AMBARI_ENV"</span><br><span class="line">  set -u</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ -z "$&#123;AMBARI_PASSPHRASE:-&#125;" ]; then</span><br><span class="line">  AMBARI_PASSPHRASE="DEV"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ -n "$&#123;JAVA_HOME:-&#125;" ]; then</span><br><span class="line">  export JAVA_HOME=$JAVA_HOME</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">export AMBARI_PASSPHRASE=$AMBARI_PASSPHRASE</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> check <span class="keyword">for</span> version</span></span><br><span class="line">majversion=`$PYTHON -V 2&gt;&amp;1 | awk '&#123;print $2&#125;' | cut -d'.' -f1`</span><br><span class="line">minversion=`$PYTHON -V 2&gt;&amp;1 | awk '&#123;print $2&#125;' | cut -d'.' -f2`</span><br><span class="line">numversion=$(( 10 * $majversion + $minversion))</span><br><span class="line">if (( $numversion &lt; 26 )); then</span><br><span class="line">  echo "Need python version &gt; 2.6"</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br><span class="line">echo "Using python " $PYTHON</span><br><span class="line"></span><br><span class="line">ret=0</span><br><span class="line">case "$&#123;1:-&#125;" in</span><br><span class="line">  start)</span><br><span class="line">        echo -e "Starting ambari-server"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  stop)</span><br><span class="line">        echo -e "Stopping ambari-server"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  reset)</span><br><span class="line">        echo -e "Resetting ambari-server"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  restart)</span><br><span class="line">        echo -e "Restarting ambari-server"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  upgrade)</span><br><span class="line">        echo -e "Upgrading ambari-server"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  status)</span><br><span class="line">        echo -e "Ambari-server status"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  upgradestack)</span><br><span class="line">        echo -e "Upgrading stack of ambari-server"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  setup)</span><br><span class="line">        echo -e "Setup ambari-server"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  setup-jce)</span><br><span class="line">        echo -e "Updating jce policy"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  setup-pam)</span><br><span class="line">        echo -e "Setting up PAM properties..."</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  migrate-ldap-pam)</span><br><span class="line">        echo -e "Migration LDAP to PAM"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  setup-ldap)</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  sync-ldap)</span><br><span class="line">        echo -e "Syncing with LDAP..."</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  set-current)</span><br><span class="line">        echo -e "Setting current version..."</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  setup-security)</span><br><span class="line">        echo -e "Security setup options..."</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  refresh-stack-hash)</span><br><span class="line">        echo -e "Refreshing stack hashes..."</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  backup)</span><br><span class="line">        echo -e "Backing up Ambari File System state... *this will not backup the server database*"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  restore)</span><br><span class="line">        echo -e "Restoring Ambari File System state"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  update-host-names)</span><br><span class="line">        echo -e "Updating host names"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  check-database)</span><br><span class="line">        echo -e "Checking database"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  enable-stack)</span><br><span class="line">        echo -e "Enabling stack(s)..."</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  setup-sso)</span><br><span class="line">        echo -e "Setting up SSO authentication properties..."</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  setup-trusted-proxy)</span><br><span class="line">         echo -e "Setting up Trusted Proxy support..."</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  db-purge-history)</span><br><span class="line">        echo -e "Purge database history..."</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  install-mpack)</span><br><span class="line">        echo -e "Installing management pack"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  uninstall-mpack)</span><br><span class="line">        echo -e "Uninstalling management pack"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  upgrade-mpack)</span><br><span class="line">        echo -e "Upgrading management pack"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  setup-kerberos)</span><br><span class="line">        echo -e "Setting up Kerberos authentication"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  *)</span><br><span class="line">        echo "Usage: $AMBARI_EXECUTABLE</span><br><span class="line">        &#123;start|stop|reset|restart|upgrade|status|upgradestack|setup|setup-jce|setup-ldap|sync-ldap|set-current|setup-security|refresh-stack-hash|backup|restore|update-host-names|check-database|enable-stack|setup-sso|setup-trusted-proxy|db-purge-history|install-mpack|uninstall-mpack|upgrade-mpack|setup-kerberos|setup-pam|migrate-ldap-pam&#125; [options]</span><br><span class="line">        Use $AMBARI_PYTHON_EXECUTABLE &lt;action&gt; --help to get details on options available.</span><br><span class="line">        Or, simply invoke ambari-server.py --help to print the options."</span><br><span class="line">        exit 1</span><br><span class="line">esac</span><br><span class="line"></span><br><span class="line">exit $?</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="ambari-server-start"><a href="#ambari-server-start" class="headerlink" title="ambari-server start"></a>ambari-server start</h2>
+      
+    </div>
+    
+    
+    
+	
+	<div style="text-align:center;color: #ccc;font-size:15px;">------------------------- 文 章 结 束 <i class="fa fa-paw"></i> <i class="fa fa-paw"></i> 感 谢 观 看 -------------------------</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Ambari/" rel="tag"> Ambari</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/04/04/Java-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="next" title="Java-设计模式">
+                <i class="fa fa-chevron-left"></i> Java-设计模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="LiuJiNan" />
+            
+              <p class="site-author-name" itemprop="name">LiuJiNan</p>
+              <p class="site-description motion-element" itemprop="description">学习笔记，归纳总结！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Liujinan001" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ambari-server-start"><span class="nav-text">ambari-server start</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiuJiNan</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点总字数&#58;</span>
+    
+    <span title="站点总字数">23.9k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
++ <!-- 页面点击小红心 -->
++ <script type="text/javascript" src="/js/src/love.js"></script>

@@ -1,6 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Ambari源码</title>
+    <url>/2021/04/16/Ambari%E6%BA%90%E7%A0%81/</url>
+    <content><![CDATA[<p> // TODO 引言</p>
+<p>如下Ambari的源码，只讲述其功能实现逻辑，对于其架构，在其他章节阐述。</p>
+<p>Ambari的版本位Apache Ambari 2.7.5，HDP</p>
+<p>使用rpm包安装完ambari-server以后，可以通过如下命令对ambari-server进行操作：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ambari-server &lt;options&gt;</span><br></pre></td></tr></table></figure>
+
+<p>&lt;options&gt; 存在如下操作： </p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>start</td>
+<td>启动</td>
+</tr>
+<tr>
+<td>stop</td>
+<td>停止</td>
+</tr>
+<tr>
+<td>reset</td>
+<td></td>
+</tr>
+<tr>
+<td>restart</td>
+<td>重启</td>
+</tr>
+<tr>
+<td>upgrade</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>状态</td>
+</tr>
+<tr>
+<td>upgradestack</td>
+<td></td>
+</tr>
+<tr>
+<td>setup</td>
+<td></td>
+</tr>
+<tr>
+<td>setup-jce</td>
+<td></td>
+</tr>
+<tr>
+<td>setup-ldap</td>
+<td></td>
+</tr>
+<tr>
+<td>sync-ldap</td>
+<td></td>
+</tr>
+<tr>
+<td>set-current</td>
+<td></td>
+</tr>
+<tr>
+<td>setup-security</td>
+<td></td>
+</tr>
+<tr>
+<td>refresh-stack-hash</td>
+<td></td>
+</tr>
+<tr>
+<td>backup</td>
+<td></td>
+</tr>
+<tr>
+<td>restore</td>
+<td></td>
+</tr>
+<tr>
+<td>update-host-names</td>
+<td></td>
+</tr>
+<tr>
+<td>check-database</td>
+<td></td>
+</tr>
+<tr>
+<td>enable-stack</td>
+<td></td>
+</tr>
+<tr>
+<td>setup-sso</td>
+<td></td>
+</tr>
+<tr>
+<td>setup-trusted-proxy</td>
+<td></td>
+</tr>
+<tr>
+<td>db-purge-history</td>
+<td></td>
+</tr>
+<tr>
+<td>install-mpack</td>
+<td></td>
+</tr>
+<tr>
+<td>uninstall-mpack</td>
+<td></td>
+</tr>
+<tr>
+<td>upgrade-mpack</td>
+<td></td>
+</tr>
+<tr>
+<td>setup-kerberos</td>
+<td></td>
+</tr>
+<tr>
+<td>setup-pam</td>
+<td></td>
+</tr>
+<tr>
+<td>migrate-ldap-pam</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>其对应的是一个可执行文件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apache-ambari-2.7.5-src/ambari-server/sbin/ambari-server</span><br></pre></td></tr></table></figure>
+
+<p>中文部分为我自己加的注释：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/env bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig: 345 95 20</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> description: ambari-server daemon</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> processname: ambari-server</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Licensed to the Apache Software Foundation (ASF) under one</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> or more contributor license agreements.  See the NOTICE file</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> distributed with this work <span class="keyword">for</span> additional information</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> regarding copyright ownership.  The ASF licenses this file</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> to you under the Apache License, Version 2.0 (the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="string">"License"</span>); you may not use this file except <span class="keyword">in</span> compliance</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> with the License.  You may obtain a copy of the License at</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">     http://www.apache.org/licenses/LICENSE-2.0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Unless required by applicable law or agreed to <span class="keyword">in</span> writing, software</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> distributed under the License is distributed on an <span class="string">"AS IS"</span> BASIS,</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> See the License <span class="keyword">for</span> the specific language governing permissions and</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> limitations under the License.</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">## BEGIN INIT INFO</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Provides:          ambari-server</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Required-Start:    <span class="variable">$local_fs</span> <span class="variable">$remote_fs</span> <span class="variable">$network</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Required-Start:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Required-Stop:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Default-Start:     2 3 4 5</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Default-Stop:      0 6</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">## END INIT INFO</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> /etc/init.d/ambari-server </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 一般在脚本文件的开头</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 作用：脚本遇到错误时停止执行，并返回错误的行数信息 </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> -u == <span class="built_in">set</span> -o nounset</span></span><br><span class="line">set -u # fail on unset variables</span><br><span class="line">VERSION="$&#123;ambariFullVersion&#125;"</span><br><span class="line">HASH="$&#123;buildNumber&#125;"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> </span></span><br><span class="line">case "$&#123;1:-&#125;" in</span><br><span class="line">  --version)</span><br><span class="line">        echo -e $VERSION</span><br><span class="line">        exit 0</span><br><span class="line">        ;;</span><br><span class="line">  --hash)</span><br><span class="line">        echo -e $HASH</span><br><span class="line">        exit 0</span><br><span class="line">        ;;</span><br><span class="line">esac</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> BASH_SOURCE[0] 等价于 BASH_SOURCE， 返回当前执行的shell文件所在的路径及文件名，常用于<span class="built_in">source</span>脚本时</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如下为常用命令，用于获取脚本所在的绝对路径</span></span><br><span class="line">SCRIPT_DIR="$( cd "$( dirname "$&#123;BASH_SOURCE[0]&#125;" )" &amp;&amp; pwd )"</span><br><span class="line"><span class="meta">#</span><span class="bash"> the below line (ROOT=<span class="string">"/"</span>) is replaced by install-helper.sh. Don<span class="string">'t edit/remove it.</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将ROOT变量中的<span class="string">'/'</span>替换为<span class="string">''</span>，即空字符串，sed中间的分隔符可以使用其他字符，如这里使用的时<span class="string">'$'</span></span></span><br><span class="line">ROOT="/"</span><br><span class="line">ROOT=`echo $ROOT | sed 's/\/$//'`</span><br><span class="line">export ROOT</span><br><span class="line"></span><br><span class="line">export PATH=$ROOT/usr/lib/ambari-server/*:$PATH:/sbin/:/usr/sbin</span><br><span class="line">export AMBARI_CONF_DIR=$ROOT/etc/ambari-server/conf</span><br><span class="line"></span><br><span class="line">PYTHON_WRAP="$ROOT/usr/bin/ambari-python-wrap"</span><br><span class="line">AMBARI_ENV="$ROOT/var/lib/ambari-server/ambari-env.sh"</span><br><span class="line">AMBARI_PYTHON_EXECUTABLE="$ROOT/usr/sbin/ambari-server.py"</span><br><span class="line">AMBARI_EXECUTABLE="$ROOT/usr/sbin/ambari-server"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> -u显示用户ID，-u -n连用显示用户名，例如使用root用户执行的ambari-server，id -u -n显示的就是root</span></span><br><span class="line">current_user=`id -u -n`</span><br><span class="line"><span class="meta">#</span><span class="bash"> sudo的-l表示列出所有权限，-S没有查到用法，查看sudo的usage也没有，用处存疑？</span></span><br><span class="line">echo "" | sudo -S -l &gt; /dev/null 2&gt;&amp;1</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断上一条结果是否执行成功，euid等于0表示具有root权限</span></span><br><span class="line">if [ "$?" != "0" ] &amp;&amp; [ "$EUID" -ne 0 ] ; then</span><br><span class="line"> echo "You can't perform this operation as non-sudoer user. Please re-login or configure sudo access for this user."</span><br><span class="line"> exit -1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> </span></span><br><span class="line">if [ -z "$&#123;PYTHON:-&#125;" ] ; then</span><br><span class="line">  export PYTHON=`readlink $PYTHON_WRAP`</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ -a "$AMBARI_ENV" ]; then</span><br><span class="line">  set +u # temporary disable variables checking for env</span><br><span class="line">  . "$AMBARI_ENV"</span><br><span class="line">  set -u</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ -z "$&#123;AMBARI_PASSPHRASE:-&#125;" ]; then</span><br><span class="line">  AMBARI_PASSPHRASE="DEV"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ -n "$&#123;JAVA_HOME:-&#125;" ]; then</span><br><span class="line">  export JAVA_HOME=$JAVA_HOME</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">export AMBARI_PASSPHRASE=$AMBARI_PASSPHRASE</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> check <span class="keyword">for</span> version</span></span><br><span class="line">majversion=`$PYTHON -V 2&gt;&amp;1 | awk '&#123;print $2&#125;' | cut -d'.' -f1`</span><br><span class="line">minversion=`$PYTHON -V 2&gt;&amp;1 | awk '&#123;print $2&#125;' | cut -d'.' -f2`</span><br><span class="line">numversion=$(( 10 * $majversion + $minversion))</span><br><span class="line">if (( $numversion &lt; 26 )); then</span><br><span class="line">  echo "Need python version &gt; 2.6"</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br><span class="line">echo "Using python " $PYTHON</span><br><span class="line"></span><br><span class="line">ret=0</span><br><span class="line">case "$&#123;1:-&#125;" in</span><br><span class="line">  start)</span><br><span class="line">        echo -e "Starting ambari-server"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  stop)</span><br><span class="line">        echo -e "Stopping ambari-server"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  reset)</span><br><span class="line">        echo -e "Resetting ambari-server"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  restart)</span><br><span class="line">        echo -e "Restarting ambari-server"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  upgrade)</span><br><span class="line">        echo -e "Upgrading ambari-server"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  status)</span><br><span class="line">        echo -e "Ambari-server status"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  upgradestack)</span><br><span class="line">        echo -e "Upgrading stack of ambari-server"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  setup)</span><br><span class="line">        echo -e "Setup ambari-server"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  setup-jce)</span><br><span class="line">        echo -e "Updating jce policy"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  setup-pam)</span><br><span class="line">        echo -e "Setting up PAM properties..."</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  migrate-ldap-pam)</span><br><span class="line">        echo -e "Migration LDAP to PAM"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  setup-ldap)</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  sync-ldap)</span><br><span class="line">        echo -e "Syncing with LDAP..."</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  set-current)</span><br><span class="line">        echo -e "Setting current version..."</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  setup-security)</span><br><span class="line">        echo -e "Security setup options..."</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  refresh-stack-hash)</span><br><span class="line">        echo -e "Refreshing stack hashes..."</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  backup)</span><br><span class="line">        echo -e "Backing up Ambari File System state... *this will not backup the server database*"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  restore)</span><br><span class="line">        echo -e "Restoring Ambari File System state"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  update-host-names)</span><br><span class="line">        echo -e "Updating host names"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  check-database)</span><br><span class="line">        echo -e "Checking database"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  enable-stack)</span><br><span class="line">        echo -e "Enabling stack(s)..."</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  setup-sso)</span><br><span class="line">        echo -e "Setting up SSO authentication properties..."</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  setup-trusted-proxy)</span><br><span class="line">         echo -e "Setting up Trusted Proxy support..."</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  db-purge-history)</span><br><span class="line">        echo -e "Purge database history..."</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  install-mpack)</span><br><span class="line">        echo -e "Installing management pack"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  uninstall-mpack)</span><br><span class="line">        echo -e "Uninstalling management pack"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  upgrade-mpack)</span><br><span class="line">        echo -e "Upgrading management pack"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  setup-kerberos)</span><br><span class="line">        echo -e "Setting up Kerberos authentication"</span><br><span class="line">        $PYTHON "$AMBARI_PYTHON_EXECUTABLE" "$@"</span><br><span class="line">        ;;</span><br><span class="line">  *)</span><br><span class="line">        echo "Usage: $AMBARI_EXECUTABLE</span><br><span class="line">        &#123;start|stop|reset|restart|upgrade|status|upgradestack|setup|setup-jce|setup-ldap|sync-ldap|set-current|setup-security|refresh-stack-hash|backup|restore|update-host-names|check-database|enable-stack|setup-sso|setup-trusted-proxy|db-purge-history|install-mpack|uninstall-mpack|upgrade-mpack|setup-kerberos|setup-pam|migrate-ldap-pam&#125; [options]</span><br><span class="line">        Use $AMBARI_PYTHON_EXECUTABLE &lt;action&gt; --help to get details on options available.</span><br><span class="line">        Or, simply invoke ambari-server.py --help to print the options."</span><br><span class="line">        exit 1</span><br><span class="line">esac</span><br><span class="line"></span><br><span class="line">exit $?</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="ambari-server-start"><a href="#ambari-server-start" class="headerlink" title="ambari-server start"></a>ambari-server start</h2>]]></content>
+      <categories>
+        <category>Ambari</category>
+      </categories>
+      <tags>
+        <tag>Ambari</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java-设计模式</title>
+    <url>/2021/04/04/Java-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<p>Java是面向对象编程、支持跨平台的程序设计语言。Java之父：James Gosling。</p>
+<p>对于程序设计语言，本质就是规则，学习的目的：掌握规则，读懂代码，规范开发。</p>
+<p>Java存在两种核心机制：Java虚拟机JVM(Java Virtual Machine)和垃圾回收机制GC(Garbage Collection)</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>[01] Shell脚本编程</title>
     <url>/2021/02/22/%5B01%5D%20Shell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<p>最近，大概用了2个星期，学习了《Linux命令行与shell脚本编程大全》(第3版)这本书，加深了平时工作中对相关知识的理解，二刷书籍，将相关的笔记记录如下。</p>
